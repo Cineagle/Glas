@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>18.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{602a5f45-e7de-4365-9876-6dff7d944888}</ProjectGuid>
+    <RootNamespace>Glas</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="source\readme\About.md" />
+    <None Include="source\readme\TODO.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\modules\core\common\entries\Glas.ErrorEntry.ixx" />
+    <ClCompile Include="source\modules\core\common\entries\Glas.InfoEntry.ixx" />
+    <ClCompile Include="source\modules\core\common\entries\Glas.LinesEntry.ixx" />
+    <ClCompile Include="source\modules\core\common\entries\Glas.SequenceEntry.ixx" />
+    <ClCompile Include="source\modules\core\common\entries\Glas.SuccessEntry.ixx" />
+    <ClCompile Include="source\modules\core\common\entries\Glas.TraceEntry.ixx" />
+    <ClCompile Include="source\modules\core\common\entries\Glas.WarningEntry.ixx" />
+    <ClCompile Include="source\modules\core\common\exception\Glas.Exception.ixx" />
+    <ClCompile Include="source\modules\core\common\fields\Glas.LocationField.ixx" />
+    <ClCompile Include="source\modules\core\common\fields\Glas.LoggerNameField.ixx" />
+    <ClCompile Include="source\modules\core\common\fields\Glas.MessageField.ixx" />
+    <ClCompile Include="source\modules\core\common\fields\Glas.ThreadIDField.ixx" />
+    <ClCompile Include="source\modules\core\common\fields\Glas.TimePointField.ixx" />
+    <ClCompile Include="source\modules\core\common\fields\Glas.TypeField.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.Entry.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.Format.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.Logger.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.Output.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.OutputManager.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.Padding.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.Queue.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.StringOutputFormat.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.VTSequence.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glas.VTStyle.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glass.BasicCharBufferWriter.ixx" />
+    <ClCompile Include="source\modules\core\common\foundation\Glass.Concepts.ixx" />
+    <ClCompile Include="source\modules\core\common\prepares\Glas.LocationPrepare.ixx" />
+    <ClCompile Include="source\modules\core\common\prepares\Glas.LoggerNamePrepare.ixx" />
+    <ClCompile Include="source\modules\core\common\prepares\Glas.MessagePrepare.ixx" />
+    <ClCompile Include="source\modules\core\common\prepares\Glas.TypePrepare.ixx" />
+    <ClCompile Include="source\modules\core\os\windows\entries\Glas.BytesEntry.ixx" />
+    <ClCompile Include="source\modules\core\os\windows\exception\Glas.Exception.cpp" />
+    <ClCompile Include="source\modules\core\os\windows\fields\Glas.ErrorCodeField.ixx" />
+    <ClCompile Include="source\modules\core\os\windows\outputs\Glas.ConsoleStringOutput.ixx" />
+    <ClCompile Include="source\modules\core\os\windows\outputs\Glas.DebugStringOutput.ixx" />
+    <ClCompile Include="source\modules\core\os\windows\outputs\Glas.File.ixx" />
+    <ClCompile Include="source\modules\core\os\windows\outputs\Glas.FileStringOutput.ixx" />
+    <ClCompile Include="source\modules\tests\BinaryOutputLogger\os\windows\Glas.Test.BinaryOutputFile.ixx" />
+    <ClCompile Include="source\modules\tests\BinaryOutputLogger\os\windows\Glas.Test.BinaryOutputLogger.ixx" />
+    <ClCompile Include="source\modules\tests\BinaryOutputLogger\os\windows\Glas.Test.ValueEntry.ixx" />
+    <ClCompile Include="source\modules\tests\ColoredLogger\os\windows\Glas.Test.ColoredLogger.ixx" />
+    <ClCompile Include="source\modules\tests\CustomEntryLogger\os\windows\Glas.Test.CriticalEntry.ixx" />
+    <ClCompile Include="source\modules\tests\CustomEntryLogger\os\windows\Glas.Test.CustomEntryLogger.ixx" />
+    <ClCompile Include="source\modules\tests\CustomFieldLogger\os\windows\Glas.Test.CustomFieldLogger.ixx" />
+    <ClCompile Include="source\modules\tests\CustomFieldLogger\os\windows\Glas.Test.UserNameField.ixx" />
+    <ClCompile Include="source\modules\tests\CustomStringOutputLogger\os\windows\Glas.Test.CustomStringOutputLogger.ixx" />
+    <ClCompile Include="source\modules\tests\CustomStringOutputLogger\os\windows\Glas.Test.WindowsEventOutput.ixx" />
+    <ClCompile Include="source\modules\tests\DirectLogger\os\windows\Glas.Test.DirectLogger.ixx" />
+    <ClCompile Include="source\modules\tests\MaxiLogger\os\windows\Glas.Test.MaxiLogger.ixx" />
+    <ClCompile Include="source\modules\tests\MiniLogger\os\windows\Glas.Test.MiniLogger.ixx" />
+    <ClCompile Include="source\modules\tests\MiniLogger\os\windows\Main.cpp" />
+    <ClCompile Include="source\modules\tests\SeparateFilesLogger\os\windows\Glas.Test.SeparateFilesLogger.ixx" />
+    <ClCompile Include="source\modules\tests\SeveralLoggers\os\windows\Glas.Test.DebugLogger.ixx" />
+    <ClCompile Include="source\modules\tests\SeveralLoggers\os\windows\Glas.Test.NotifyLogger.ixx" />
+    <ClCompile Include="source\modules\tests\SeveralLoggers\os\windows\Glas.Test.OtherLogger.ixx" />
+    <ClCompile Include="source\modules\tests\UnboundQueueLoggger\os\windows\Glas.Test.UnboundQueueLogger.ixx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

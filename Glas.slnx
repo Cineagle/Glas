@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Glas.vcxproj" Id="602a5f45-e7de-4365-9876-6dff7d944888" />
+</Solution>
