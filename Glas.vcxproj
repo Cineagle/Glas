@@ -172,6 +172,7 @@
     <ClCompile Include="source\modules\tests\BinaryOutputLogger\os\windows\Glas.Test.BinaryOutputLogger.ixx" />
     <ClCompile Include="source\modules\tests\BinaryOutputLogger\os\windows\Glas.Test.ValueEntry.ixx" />
     <ClCompile Include="source\modules\tests\ColoredLogger\os\windows\Glas.Test.ColoredLogger.ixx" />
+    <ClCompile Include="source\modules\tests\CommandLineLogger\os\windows\CommandLineLogger.ixx" />
     <ClCompile Include="source\modules\tests\CustomEntryLogger\os\windows\Glas.Test.CriticalEntry.ixx" />
     <ClCompile Include="source\modules\tests\CustomEntryLogger\os\windows\Glas.Test.CustomEntryLogger.ixx" />
     <ClCompile Include="source\modules\tests\CustomFieldLogger\os\windows\Glas.Test.CustomFieldLogger.ixx" />

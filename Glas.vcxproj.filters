@@ -151,6 +151,15 @@
     <Filter Include="source\modules\tests\SeparateFilesLogger\os\windows">
       <UniqueIdentifier>{bfe9ad8a-38dc-456c-8db4-82978543403f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\modules\tests\CommandLineLogger">
+      <UniqueIdentifier>{56ff8783-6238-4e80-814a-76a33b7b3e82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\tests\CommandLineLogger\os">
+      <UniqueIdentifier>{53d54aa8-96e3-4801-9790-546b15b3e3e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\tests\CommandLineLogger\os\windows">
+      <UniqueIdentifier>{f948d553-2970-4f71-a0d1-e6d24ab684bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="source\readme\About.md">
@@ -325,6 +334,9 @@
     </ClCompile>
     <ClCompile Include="source\modules\tests\BinaryOutputLogger\os\windows\Glas.Test.ValueEntry.ixx">
       <Filter>source\modules\tests\BinaryOutputLogger\os\windows</Filter>
+    </ClCompile>
+    <ClCompile Include="source\modules\tests\CommandLineLogger\os\windows\CommandLineLogger.ixx">
+      <Filter>source\modules\tests\CommandLineLogger\os\windows</Filter>
     </ClCompile>
     <ClCompile Include="source\modules\tests\MiniLogger\os\windows\Main.cpp">
       <Filter>source\modules\tests\MiniLogger\os\windows</Filter>
