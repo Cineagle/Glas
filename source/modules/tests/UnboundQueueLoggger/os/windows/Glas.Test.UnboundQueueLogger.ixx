@@ -35,11 +35,11 @@ export namespace Glas::Test
 	public:
 		using Scheme = Glas::Queue::Scheme;
 	private:
-		UnboundQueueLogger(Glas::StringLike auto&& loggerName,
+		UnboundQueueLogger(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
-		static std::shared_ptr<UnboundQueueLogger> create(Glas::StringLike auto&& loggerName,
+		static std::shared_ptr<UnboundQueueLogger> create(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
@@ -57,7 +57,7 @@ export namespace Glas::Test
 
 export namespace Glas::Test
 {
-	UnboundQueueLogger::UnboundQueueLogger(Glas::StringLike auto&& loggerName,
+	UnboundQueueLogger::UnboundQueueLogger(StringLike auto&& loggerName,
 		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
 		Glas::Logger<
@@ -77,7 +77,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<UnboundQueueLogger> UnboundQueueLogger::create(
-		Glas::StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<UnboundQueueLogger>{

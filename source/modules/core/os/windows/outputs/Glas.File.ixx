@@ -15,7 +15,7 @@ export namespace Glas
 	public:
 		virtual ~File();
 	public:
-		File(Glas::StringLike auto&& path, const PathType pathType,
+		File(StringLike auto&& path, const PathType pathType,
 			const std::size_t flushSize, const std::ios_base::openmode openMode);
 
 		explicit File(const std::string_view id);
@@ -52,7 +52,7 @@ export namespace Glas
 
 export namespace Glas
 {
-	File::File(Glas::StringLike auto&& path, const PathType pathType,
+	File::File(StringLike auto&& path, const PathType pathType,
 		const std::size_t flushSize, const std::ios_base::openmode openMode) :
 
 		path{ std::forward<decltype(path)>(path) },

@@ -38,7 +38,7 @@ export namespace Glas
         SequenceEntry& operator=(SequenceEntry&&) noexcept = delete;
     public:
         void sequence(this auto& self, const std::size_t count, 
-            Glas::StringLike auto&& message,
+            StringLike auto&& message,
             const std::source_location location = std::source_location::current());
 
         void sequence(this auto& self, const std::size_t count, Format format,
@@ -78,7 +78,7 @@ export namespace Glas
 
     template <SequenceEntryMixins... Mixins>
     void SequenceEntry<Mixins...>::sequence(this auto& self, const std::size_t count,
-        Glas::StringLike auto&& message, const std::source_location location)
+        StringLike auto&& message, const std::source_location location)
     {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {

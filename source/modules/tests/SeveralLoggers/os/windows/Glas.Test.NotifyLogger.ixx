@@ -37,11 +37,11 @@ export namespace Glas::Test
 			Glas::MessageField
 		>;
 	private:
-		NotifyLogger(Glas::StringLike auto&& loggerName,
+		NotifyLogger(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
-		static std::shared_ptr<NotifyLogger> create(Glas::StringLike auto&& loggerName,
+		static std::shared_ptr<NotifyLogger> create(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
@@ -53,7 +53,7 @@ export namespace Glas::Test
 
 export namespace Glas::Test
 {
-	NotifyLogger::NotifyLogger(Glas::StringLike auto&& loggerName,
+	NotifyLogger::NotifyLogger(StringLike auto&& loggerName,
 		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
 			Glas::Logger<
@@ -71,7 +71,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<NotifyLogger> NotifyLogger::create(
-		Glas::StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<NotifyLogger>{

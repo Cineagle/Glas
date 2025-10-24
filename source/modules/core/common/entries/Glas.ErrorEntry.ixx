@@ -37,7 +37,7 @@ export namespace Glas
         ErrorEntry(ErrorEntry&&) noexcept = delete;
         ErrorEntry& operator=(ErrorEntry&&) noexcept = delete;
     public:
-        void error(this auto& self, Glas::StringLike auto&& message,
+        void error(this auto& self, StringLike auto&& message,
             const std::source_location location = std::source_location::current());
 
         void error(this auto& self, Format format,
@@ -72,7 +72,7 @@ export namespace Glas
 
     template <ErrorEntryMixins... Mixins>
     void ErrorEntry<Mixins...>::error(this auto& self, 
-        Glas::StringLike auto&& message, const std::source_location location)
+        StringLike auto&& message, const std::source_location location)
     {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {

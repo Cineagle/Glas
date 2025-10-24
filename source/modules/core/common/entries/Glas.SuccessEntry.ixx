@@ -37,7 +37,7 @@ export namespace Glas
         SuccessEntry(SuccessEntry&&) noexcept = delete;
         SuccessEntry& operator=(SuccessEntry&&) noexcept = delete;
     public:
-        void success(this auto& self, Glas::StringLike auto&& message,
+        void success(this auto& self, StringLike auto&& message,
             const std::source_location location = std::source_location::current());
 
         void success(this auto& self, Format format,
@@ -72,7 +72,7 @@ export namespace Glas
 
     template <SuccessEntryMixins... Mixins>
     void SuccessEntry<Mixins...>::success(this auto& self,
-        Glas::StringLike auto&& message, const std::source_location location)
+        StringLike auto&& message, const std::source_location location)
     {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {

@@ -48,11 +48,11 @@ export namespace Glas::Test
 			Glas::MessageField, Glas::ErrorCodeField, Glas::LocationField
 		>;
 	private:
-		DebugLogger(Glas::StringLike auto&& loggerName,
+		DebugLogger(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
-		static std::shared_ptr<DebugLogger> create(Glas::StringLike auto&& loggerName,
+		static std::shared_ptr<DebugLogger> create(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
@@ -69,7 +69,7 @@ export namespace Glas::Test
 
 export namespace Glas::Test
 {
-	DebugLogger::DebugLogger(Glas::StringLike auto&& loggerName,
+	DebugLogger::DebugLogger(StringLike auto&& loggerName,
 		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
 			Glas::Logger<
@@ -91,7 +91,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<DebugLogger> DebugLogger::create(
-		Glas::StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<DebugLogger>{

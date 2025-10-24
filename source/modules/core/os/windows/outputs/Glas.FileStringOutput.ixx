@@ -18,7 +18,7 @@ export namespace Glas
 	public:
 		virtual ~FileStringOutput() override;
 	private:
-		FileStringOutput(Glas::StringLike auto&& path, const PathType pathType,
+		FileStringOutput(StringLike auto&& path, const PathType pathType,
 			const std::size_t flushSize, const std::ios_base::openmode openMode);
 
 		explicit FileStringOutput(const std::string_view id);
@@ -29,7 +29,7 @@ export namespace Glas
 		FileStringOutput(FileStringOutput&&) noexcept = delete;
 		FileStringOutput& operator=(FileStringOutput&&) noexcept = delete;
 	public:
-		static std::shared_ptr<FileStringOutput> create(Glas::StringLike auto&& path,
+		static std::shared_ptr<FileStringOutput> create(StringLike auto&& path,
 			const PathType pathType, const std::size_t flushSize = 0, 
 			const std::ios_base::openmode openMode = 
 			std::ios::out | std::ios::trunc | std::ios::binary);
@@ -47,7 +47,7 @@ export namespace Glas
 
 export namespace Glas
 {
-	FileStringOutput::FileStringOutput(Glas::StringLike auto&& path, const PathType pathType,
+	FileStringOutput::FileStringOutput(StringLike auto&& path, const PathType pathType,
 		const std::size_t flushSize, const std::ios_base::openmode openMode) :
 
 		File{ std::forward<decltype(path)>(path), pathType, flushSize, openMode }
@@ -61,7 +61,7 @@ export namespace Glas
 		writeToFile();
 	}
 
-	std::shared_ptr<FileStringOutput> FileStringOutput::create(Glas::StringLike auto&& path,
+	std::shared_ptr<FileStringOutput> FileStringOutput::create(StringLike auto&& path,
 		const PathType pathType, const std::size_t flushSize, const std::ios_base::openmode openMode)
 	{
 		auto ptr = std::unique_ptr<FileStringOutput>{

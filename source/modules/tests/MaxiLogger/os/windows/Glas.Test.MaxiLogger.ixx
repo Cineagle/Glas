@@ -81,11 +81,11 @@ export namespace Glas::Test
 			>
 	{
 	private:
-		MaxiLogger(Glas::StringLike auto&& loggerName,
+		MaxiLogger(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
-		static std::shared_ptr<MaxiLogger> create(Glas::StringLike auto&& loggerName,
+		static std::shared_ptr<MaxiLogger> create(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
@@ -108,7 +108,7 @@ export namespace Glas::Test
 
 export namespace Glas::Test
 {
-	MaxiLogger::MaxiLogger(Glas::StringLike auto&& loggerName,
+	MaxiLogger::MaxiLogger(StringLike auto&& loggerName,
 		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
 			Glas::Logger<
@@ -151,7 +151,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<MaxiLogger> MaxiLogger::create(
-		Glas::StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<MaxiLogger>{

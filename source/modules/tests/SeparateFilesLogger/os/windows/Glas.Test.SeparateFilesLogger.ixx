@@ -29,11 +29,11 @@ export namespace Glas::Test
 			>
 	{
 	private:
-		SeparateFilesLogger(Glas::StringLike auto&& loggerName,
+		SeparateFilesLogger(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
-		static std::shared_ptr<SeparateFilesLogger> create(Glas::StringLike auto&& loggerName,
+		static std::shared_ptr<SeparateFilesLogger> create(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
@@ -51,7 +51,7 @@ export namespace Glas::Test
 
 export namespace Glas::Test
 {
-	SeparateFilesLogger::SeparateFilesLogger(Glas::StringLike auto&& loggerName,
+	SeparateFilesLogger::SeparateFilesLogger(StringLike auto&& loggerName,
 		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
 		Glas::Logger<
@@ -68,7 +68,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<SeparateFilesLogger> SeparateFilesLogger::create(
-		Glas::StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<SeparateFilesLogger>{

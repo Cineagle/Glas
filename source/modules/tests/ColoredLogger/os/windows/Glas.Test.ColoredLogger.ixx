@@ -37,11 +37,11 @@ export namespace Glas::Test
 			>
 	{
 	private:
-		ColoredLogger(Glas::StringLike auto&& loggerName,
+		ColoredLogger(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
-		static std::shared_ptr<ColoredLogger> create(Glas::StringLike auto&& loggerName,
+		static std::shared_ptr<ColoredLogger> create(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	public:
@@ -61,7 +61,7 @@ export namespace Glas::Test
 
 export namespace Glas::Test
 {
-	ColoredLogger::ColoredLogger(Glas::StringLike auto&& loggerName,
+	ColoredLogger::ColoredLogger(StringLike auto&& loggerName,
 		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
 			Glas::Logger<
@@ -82,7 +82,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<ColoredLogger> ColoredLogger::create(
-		Glas::StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<ColoredLogger>{

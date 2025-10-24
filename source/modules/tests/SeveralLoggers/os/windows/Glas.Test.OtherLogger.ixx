@@ -27,11 +27,11 @@ export namespace Glas::Test
 			Glas::TimePointField, Glas::LoggerNameField, Glas::MessageField
 		>;
 	private:
-		OtherLogger(Glas::StringLike auto&& loggerName,
+		OtherLogger(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
-		static std::shared_ptr<OtherLogger> create(Glas::StringLike auto&& loggerName,
+		static std::shared_ptr<OtherLogger> create(StringLike auto&& loggerName,
 			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
@@ -45,7 +45,7 @@ export namespace Glas::Test
 
 export namespace Glas::Test
 {
-	OtherLogger::OtherLogger(Glas::StringLike auto&& loggerName,
+	OtherLogger::OtherLogger(StringLike auto&& loggerName,
 		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
 		Glas::Logger<
@@ -59,7 +59,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<OtherLogger> OtherLogger::create(
-		Glas::StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<OtherLogger>{

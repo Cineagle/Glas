@@ -25,7 +25,7 @@ export namespace Glas
 	public:
 		virtual ~Logger() = default;
 	protected:
-		Logger(Glas::StringLike auto&& loggerName, const Scheme queueScheme,
+		Logger(StringLike auto&& loggerName, const Scheme queueScheme,
 			const std::size_t queueCapacity);
 	private:
 		Logger() = delete;
@@ -34,7 +34,7 @@ export namespace Glas
 		Logger(Logger&&) noexcept = delete;
 		Logger& operator=(Logger&&) noexcept = delete;
 	public:
-		static std::shared_ptr<Logger<Mixins...>> create(Glas::StringLike auto&& loggerName,
+		static std::shared_ptr<Logger<Mixins...>> create(StringLike auto&& loggerName,
 			const Scheme queueScheme = Scheme::Bound, const std::size_t queueCapacity = 1024);
 	public:
 		std::size_t capacity() const & noexcept;
@@ -51,7 +51,7 @@ export namespace Glas
 export namespace Glas
 {
 	template <LoggerMixins... Mixins>
-	Logger<Mixins...>::Logger(Glas::StringLike auto&& loggerName,
+	Logger<Mixins...>::Logger(StringLike auto&& loggerName,
 		const Scheme queueScheme, const std::size_t queueCapacity) :
 
 		loggerName{ std::forward<decltype(loggerName)>(loggerName) },
@@ -60,7 +60,7 @@ export namespace Glas
 
 	template <LoggerMixins... Mixins>
 	std::shared_ptr<Logger<Mixins...>> Logger<Mixins...>::create(
-		Glas::StringLike auto&& loggerName, const Scheme queueScheme,
+		StringLike auto&& loggerName, const Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<Logger<Mixins...>>{

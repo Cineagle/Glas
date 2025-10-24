@@ -43,7 +43,7 @@ export namespace Glas
         BytesEntry(BytesEntry&&) noexcept = delete;
         BytesEntry& operator=(BytesEntry&&) noexcept = delete;
     public:
-        void bytes(this auto& self, Glas::StringLike auto&& message,
+        void bytes(this auto& self, StringLike auto&& message,
             const void* address, const std::size_t count,
             const std::source_location location = std::source_location::current());
 
@@ -90,7 +90,7 @@ export namespace Glas
     }
 
     template <BytesEntryMixins... Mixins>
-    void BytesEntry<Mixins...>::bytes(this auto& self, Glas::StringLike auto&& message,
+    void BytesEntry<Mixins...>::bytes(this auto& self, StringLike auto&& message,
         const void* address, const std::size_t count, const std::source_location location)
     {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {

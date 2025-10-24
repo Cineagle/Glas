@@ -37,7 +37,7 @@ export namespace Glas
         WarningEntry(WarningEntry&&) noexcept = delete;
         WarningEntry& operator=(WarningEntry&&) noexcept = delete;
     public:
-        void warning(this auto& self, Glas::StringLike auto&& message,
+        void warning(this auto& self, StringLike auto&& message,
             const std::source_location location = std::source_location::current());
 
         void warning(this auto& self, Format format,
@@ -72,7 +72,7 @@ export namespace Glas
 
     template <WarningEntryMixins... Mixins>
     void WarningEntry<Mixins...>::warning(this auto& self,
-        Glas::StringLike auto&& message, const std::source_location location)
+        StringLike auto&& message, const std::source_location location)
     {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {

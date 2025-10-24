@@ -37,7 +37,7 @@ export namespace Glas
         InfoEntry(InfoEntry&&) noexcept = delete;
         InfoEntry& operator=(InfoEntry&&) noexcept = delete;
     public:
-        void info(this auto& self, Glas::StringLike auto&& message,
+        void info(this auto& self, StringLike auto&& message,
             const std::source_location location = std::source_location::current());
 
         void info(this auto& self, Format format,
@@ -72,7 +72,7 @@ export namespace Glas
 
     template <InfoEntryMixins... Mixins>
     void InfoEntry<Mixins...>::info(this auto& self,
-        Glas::StringLike auto&& message, const std::source_location location)
+        StringLike auto&& message, const std::source_location location)
     {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {

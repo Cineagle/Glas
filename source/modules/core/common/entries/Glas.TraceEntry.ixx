@@ -37,7 +37,7 @@ export namespace Glas
         TraceEntry(TraceEntry&&) noexcept = delete;
         TraceEntry& operator=(TraceEntry&&) noexcept = delete;
     public:
-        void trace(this auto& self, Glas::StringLike auto&& message,
+        void trace(this auto& self, StringLike auto&& message,
             const std::source_location location = std::source_location::current());
 
         void trace(this auto& self, Format format,
@@ -77,7 +77,7 @@ export namespace Glas
 
     template <TraceEntryMixins... Mixins>
     void TraceEntry<Mixins...>::trace(this auto& self,
-        Glas::StringLike auto&& message, const std::source_location location)
+        StringLike auto&& message, const std::source_location location)
     {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {

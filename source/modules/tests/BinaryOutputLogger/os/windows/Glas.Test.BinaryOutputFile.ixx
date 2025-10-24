@@ -18,7 +18,7 @@ export namespace Glas::Test
 	public:
 		virtual ~BinaryOutputFile() override;
 	private:
-		BinaryOutputFile(Glas::StringLike auto&& path, const PathType pathType,
+		BinaryOutputFile(StringLike auto&& path, const PathType pathType,
 			const std::size_t flushSize, const std::ios_base::openmode openMode);
 
 		explicit BinaryOutputFile(const std::string_view id);
@@ -29,7 +29,7 @@ export namespace Glas::Test
 		BinaryOutputFile(BinaryOutputFile&&) noexcept = delete;
 		BinaryOutputFile& operator=(BinaryOutputFile&&) noexcept = delete;
 	public:
-		static std::shared_ptr<BinaryOutputFile> create(Glas::StringLike auto&& path,
+		static std::shared_ptr<BinaryOutputFile> create(StringLike auto&& path,
 			const PathType pathType, const std::size_t flushSize = 0,
 			const std::ios_base::openmode openMode =
 			std::ios::out | std::ios::trunc | std::ios::binary);
@@ -47,7 +47,7 @@ export namespace Glas::Test
 
 export namespace Glas::Test
 {
-	BinaryOutputFile::BinaryOutputFile(Glas::StringLike auto&& path, const PathType pathType,
+	BinaryOutputFile::BinaryOutputFile(StringLike auto&& path, const PathType pathType,
 		const std::size_t flushSize, const std::ios_base::openmode openMode) :
 
 		Glas::File{ std::forward<decltype(path)>(path), pathType, flushSize, openMode }
@@ -61,7 +61,7 @@ export namespace Glas::Test
 		writeToFile();
 	}
 
-	std::shared_ptr<BinaryOutputFile> BinaryOutputFile::create(Glas::StringLike auto&& path,
+	std::shared_ptr<BinaryOutputFile> BinaryOutputFile::create(StringLike auto&& path,
 		const PathType pathType, const std::size_t flushSize, const std::ios_base::openmode openMode)
 	{
 		auto ptr = std::unique_ptr<BinaryOutputFile>{
