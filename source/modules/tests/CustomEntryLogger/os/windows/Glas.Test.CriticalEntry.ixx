@@ -23,8 +23,8 @@ export namespace Glas::Test
 
     template <CriticalEntryMixins... Mixins>
     class CriticalEntry :
-        public Glas::Entry,
-        public Glas::OutputManager<>,
+        public Entry,
+        public OutputManager<>,
         public Mixins...
     {
     public:
@@ -40,12 +40,12 @@ export namespace Glas::Test
         void critical(this auto& self, StringLike auto&& message,
             const std::source_location location = std::source_location::current());
 
-        void critical(this auto& self, Glas::Format format,
+        void critical(this auto& self, Format format,
             const std::source_location location = std::source_location::current());
     private:
         virtual void expose() & override;
     private:
-        static constexpr Glas::VTStyle style{
+        static constexpr VTStyle style{
             .fgColor{
                 .red { 20 },
                 .green{ 20 },
@@ -67,12 +67,12 @@ export namespace Glas::Test
 {
     template <CriticalEntryMixins... Mixins>
     CriticalEntry<Mixins...>::CriticalEntry() {
-        vtBegin = Glas::VTSequence::formVTBegin(style);
+        vtBegin = VTSequence::formVTBegin(style);
     }
 
     template <CriticalEntryMixins... Mixins>
-    void CriticalEntry<Mixins...>::critical(this auto& self,
-        StringLike auto&& message, const std::source_location location)
+    void CriticalEntry<Mixins...>::critical(this auto& self, StringLike auto&& message, 
+        const std::source_location location)
     {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {
@@ -85,19 +85,17 @@ export namespace Glas::Test
         const auto unpacker = [&]<typename T>() {
             if (entry->T::enabled.load(std::memory_order_relaxed)) {
                 entry->T::prepare(
-                    Glas::TypePrepare{ type },
-                    Glas::LoggerNamePrepare{ self.loggerName },
-                    Glas::MessagePrepare{ message },
-                    Glas::LocationPrepare{ location }
+                    TypePrepare{ type },
+                    LoggerNamePrepare{ self.loggerName },
+                    MessagePrepare{ message },
+                    LocationPrepare{ location }
                 );
             }
         };
 
         ((unpacker.operator()<Mixins>()), ...);
 
-        if (self.CriticalEntry<Mixins...>::Entry::outputScheme.load(std::memory_order_relaxed) ==
-            Scheme::Queue)
-        {
+        if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
         else {
@@ -106,7 +104,7 @@ export namespace Glas::Test
     }
 
     template <CriticalEntryMixins... Mixins>
-    void CriticalEntry<Mixins...>::critical(this auto& self, Glas::Format format,
+    void CriticalEntry<Mixins...>::critical(this auto& self, Format format,
         const std::source_location location)
     {
         self.critical(format.text, location);
@@ -114,7 +112,7 @@ export namespace Glas::Test
 
     template <CriticalEntryMixins... Mixins>
     void CriticalEntry<Mixins...>::expose() & {
-        std::vector<Glas::StringOutputFormat> formatted;
+        std::vector<StringOutputFormat> formatted;
 
         const auto unpacker = [&]<typename T>() {
             if (this->T::enabled.load(std::memory_order_relaxed)) {
@@ -122,7 +120,7 @@ export namespace Glas::Test
                 static_assert(
                     std::same_as<
                     std::remove_cvref_t<decltype(this->T::format(std::declval<std::string_view>()))>,
-                    Glas::StringOutputFormat>,
+                    StringOutputFormat>,
                     "`format` return type mismatch."
                     );
 

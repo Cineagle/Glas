@@ -8,8 +8,8 @@ export import std;
 export namespace Glas::Test
 {
     class ValueEntry :
-        public Glas::Entry,
-        public Glas::OutputManager<std::vector<std::byte>>
+        public Entry,
+        public OutputManager<std::vector<std::byte>>
     {
     public:
         ValueEntry() = default;
@@ -42,9 +42,7 @@ export namespace Glas::Test
         entry->bytes.resize(sizeof(T));
         std::memcpy(entry->bytes.data(), address, sizeof(T));
 
-        if (self.ValueEntry::Entry::outputScheme.load(std::memory_order_relaxed) ==
-            Scheme::Queue)
-        {
+        if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
         else {

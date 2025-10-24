@@ -19,41 +19,41 @@ export namespace Glas::Test
 {
 	class DebugLogger :
 		public
-			Glas::Logger<
-				Glas::SuccessEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField, 
-					Glas::MessageField
+			Logger<
+				SuccessEntry<
+					TimePointField, TypeField, LoggerNameField, 
+					MessageField
 				>,
-				Glas::WarningEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::MessageField
+				WarningEntry<
+					TimePointField, TypeField, LoggerNameField,
+					MessageField
 				>,
-				Glas::ErrorEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::MessageField, Glas::ErrorCodeField,	Glas::LocationField
+				ErrorEntry<
+					TimePointField, TypeField, LoggerNameField,
+					MessageField, ErrorCodeField,	LocationField
 				>
 			>
 	{
 	public:
-		using Success = Glas::SuccessEntry<
-			Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-			Glas::MessageField
+		using Success = SuccessEntry<
+			TimePointField, TypeField, LoggerNameField,
+			MessageField
 		>;
-		using Warning = Glas::WarningEntry<
-			Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-			Glas::MessageField
+		using Warning = WarningEntry<
+			TimePointField, TypeField, LoggerNameField,
+			MessageField
 		>;
-		using Error = Glas::ErrorEntry<
-			Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-			Glas::MessageField, Glas::ErrorCodeField, Glas::LocationField
+		using Error = ErrorEntry<
+			TimePointField, TypeField, LoggerNameField,
+			MessageField, ErrorCodeField, LocationField
 		>;
 	private:
 		DebugLogger(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme,
+			const Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
 		static std::shared_ptr<DebugLogger> create(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
+			const Queue::Scheme queueScheme = Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
 		void tune() &;
@@ -61,29 +61,29 @@ export namespace Glas::Test
 		void tuneWarningEntry() &;
 		void tuneErrorEntry() &;
 	private:
-		std::shared_ptr<Glas::Output<>> console;
-		std::shared_ptr<Glas::Output<>> file;
-		std::shared_ptr<Glas::Output<>> debug;
+		std::shared_ptr<Output<>> console;
+		std::shared_ptr<Output<>> file;
+		std::shared_ptr<Output<>> debug;
 	};
 }
 
 export namespace Glas::Test
 {
 	DebugLogger::DebugLogger(StringLike auto&& loggerName,
-		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
+		const Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
-			Glas::Logger<
-				Glas::SuccessEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField, 
-					Glas::MessageField
+			Logger<
+				SuccessEntry<
+					TimePointField, TypeField, LoggerNameField, 
+					MessageField
 				>,
-				Glas::WarningEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::MessageField
+				WarningEntry<
+					TimePointField, TypeField, LoggerNameField,
+					MessageField
 				>,
-				Glas::ErrorEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::MessageField, Glas::ErrorCodeField,	Glas::LocationField
+				ErrorEntry<
+					TimePointField, TypeField, LoggerNameField,
+					MessageField, ErrorCodeField,	LocationField
 				>
 		>{ std::forward<decltype(loggerName)>(loggerName), queueScheme, queueCapacity }
 	{
@@ -91,7 +91,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<DebugLogger> DebugLogger::create(
-		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<DebugLogger>{
@@ -113,17 +113,17 @@ export namespace Glas::Test
 		this->SuccessEntry::LoggerNameField::enable();
 		this->SuccessEntry::MessageField::enable();
 
-		this->SuccessEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->SuccessEntry::TypeField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->SuccessEntry::LoggerNameField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->SuccessEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->SuccessEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->SuccessEntry::TypeField::padding(Padding{ .spaceAfter{ 2 } });
+		this->SuccessEntry::LoggerNameField::padding(Padding{ .spaceAfter{ 2 } });
+		this->SuccessEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->SuccessEntry::TimePointField::VTSequence::enable();
 		this->SuccessEntry::TypeField::VTSequence::enable();
 		this->SuccessEntry::LoggerNameField::VTSequence::enable();
 		this->SuccessEntry::MessageField::VTSequence::enable();
 
-		this->SuccessEntry::scheme(Glas::Entry::Scheme::Direct);
+		this->SuccessEntry::scheme(Entry::Scheme::Direct);
 	}
 
 	void DebugLogger::tuneWarningEntry() & {
@@ -132,10 +132,10 @@ export namespace Glas::Test
 		this->WarningEntry::LoggerNameField::enable();
 		this->WarningEntry::MessageField::enable();
 
-		this->WarningEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->WarningEntry::TypeField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->WarningEntry::LoggerNameField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->WarningEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->WarningEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->WarningEntry::TypeField::padding(Padding{ .spaceAfter{ 2 } });
+		this->WarningEntry::LoggerNameField::padding(Padding{ .spaceAfter{ 2 } });
+		this->WarningEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->WarningEntry::TimePointField::VTSequence::enable();
 		this->WarningEntry::TypeField::VTSequence::enable();
@@ -151,12 +151,12 @@ export namespace Glas::Test
 		this->ErrorEntry::ErrorCodeField::enable();
 		this->ErrorEntry::LocationField::enable();
 
-		this->ErrorEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->ErrorEntry::TypeField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->ErrorEntry::LoggerNameField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->ErrorEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->ErrorEntry::ErrorCodeField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->ErrorEntry::LocationField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->ErrorEntry::TypeField::padding(Padding{ .spaceAfter{ 2 } });
+		this->ErrorEntry::LoggerNameField::padding(Padding{ .spaceAfter{ 2 } });
+		this->ErrorEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::ErrorCodeField::padding(Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::LocationField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->ErrorEntry::TimePointField::VTSequence::enable();
 		this->ErrorEntry::TypeField::VTSequence::enable();

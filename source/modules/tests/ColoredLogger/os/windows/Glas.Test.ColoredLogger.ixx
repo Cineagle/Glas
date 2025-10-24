@@ -23,26 +23,26 @@ export namespace Glas::Test
 {
 	class ColoredLogger :
 		public
-			Glas::Logger<
-				Glas::InfoEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField
+			Logger<
+				InfoEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField
 				>,
-				Glas::WarningEntry<
-					Glas::TimePointField, Glas::MessageField
+				WarningEntry<
+					TimePointField, MessageField
 				>,
-				Glas::ErrorEntry<
-					Glas::TimePointField, Glas::MessageField, Glas::ErrorCodeField
+				ErrorEntry<
+					TimePointField, MessageField, ErrorCodeField
 				>
 			>
 	{
 	private:
 		ColoredLogger(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme,
+			const Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
 		static std::shared_ptr<ColoredLogger> create(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
+			const Queue::Scheme queueScheme = Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	public:
 		void changeInfoEntryStyle() &;
@@ -53,27 +53,27 @@ export namespace Glas::Test
 		void tuneWarningEntry() &;
 		void tuneErrorEntry() &;
 	private:
-		std::shared_ptr<Glas::Output<>> console;
-		std::shared_ptr<Glas::Output<>> file;
-		std::shared_ptr<Glas::Output<>> debug;
+		std::shared_ptr<Output<>> console;
+		std::shared_ptr<Output<>> file;
+		std::shared_ptr<Output<>> debug;
 	};
 }
 
 export namespace Glas::Test
 {
 	ColoredLogger::ColoredLogger(StringLike auto&& loggerName,
-		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
+		const Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
-			Glas::Logger<
-				Glas::InfoEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField
+			Logger<
+				InfoEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField
 				>,
-				Glas::WarningEntry<
-					Glas::TimePointField, Glas::MessageField
+				WarningEntry<
+					TimePointField, MessageField
 				>,
-				Glas::ErrorEntry<
-					Glas::TimePointField, Glas::MessageField, Glas::ErrorCodeField
+				ErrorEntry<
+					TimePointField, MessageField, ErrorCodeField
 				>
 			>{ std::forward<decltype(loggerName)>(loggerName), queueScheme, queueCapacity }
 	{
@@ -82,7 +82,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<ColoredLogger> ColoredLogger::create(
-		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<ColoredLogger>{
@@ -93,18 +93,18 @@ export namespace Glas::Test
 	}
 
 	void ColoredLogger::createOutputs() & {
-		console = Glas::ConsoleStringOutput::create(
-			Glas::ConsoleConfig{
+		console = ConsoleStringOutput::create(
+			ConsoleConfig{
 				.consoleTitle{ L"ColoredLogger" },
 				.fontFaceName{ L"Cascadia Mono" },
 				.vtEnabled{ true }
 			}
 		);
 
-		file = Glas::FileStringOutput::create("ColoredLogger.txt",
-			Glas::FileStringOutput::PathType::Relative);
+		file = FileStringOutput::create("ColoredLogger.txt",
+			FileStringOutput::PathType::Relative);
 
-		debug = Glas::DebugStringOutput::create();
+		debug = DebugStringOutput::create();
 	}
 
 	void ColoredLogger::tune() & {
@@ -120,11 +120,11 @@ export namespace Glas::Test
 		this->InfoEntry::ThreadIDField::enable();
 		this->InfoEntry::MessageField::enable();
 
-		this->InfoEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::TypeField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::LoggerNameField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::ThreadIDField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->InfoEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::TypeField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::LoggerNameField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::ThreadIDField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->InfoEntry::TimePointField::VTSequence::enable();
 		this->InfoEntry::TypeField::VTSequence::enable();
@@ -139,8 +139,8 @@ export namespace Glas::Test
 		this->WarningEntry::TimePointField::enable();
 		this->WarningEntry::MessageField::enable();
 
-		this->WarningEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->WarningEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->WarningEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->WarningEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->WarningEntry::TimePointField::VTSequence::enable();
 		this->WarningEntry::MessageField::VTSequence::enable();
@@ -153,9 +153,9 @@ export namespace Glas::Test
 		this->ErrorEntry::MessageField::enable();
 		this->ErrorEntry::ErrorCodeField::enable();
 
-		this->ErrorEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->ErrorEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->ErrorEntry::ErrorCodeField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->ErrorEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::ErrorCodeField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->ErrorEntry::TimePointField::VTSequence::enable();
 		this->ErrorEntry::MessageField::VTSequence::enable();
@@ -166,23 +166,23 @@ export namespace Glas::Test
 
 	void ColoredLogger::changeInfoEntryStyle() & {
 		this->InfoEntry::TimePointField::style(
-			Glas::VTStyle{
+			VTStyle{
 				.fgColor{ .red{ 144 }, .green{ 144 }, .blue{ 200 } }
 			}
 		);
 
 		this->InfoEntry::TypeField::style(
-			Glas::VTStyle{
+			VTStyle{
 				.fgColor{.red{ 200 }, .green{ 77 }, .blue{ 200 } },
 				.bgColor{.red{ 20 }, .green{ 20 }, .blue{ 20 } },
 			}
 		);
 
 		this->InfoEntry::LoggerNameField::style(
-			Glas::VTStyle{
+			VTStyle{
 				.fgColor{.red{ 144 }, .green{ 225 }, .blue{ 145 } },
 				.bgColor{.red{ 50 }, .green{ 20 }, .blue{ 20 } },
-				.effect{ Glas::VTStyle::Effect::Italic }
+				.effect{ VTStyle::Effect::Italic }
 			}
 		);
 	}

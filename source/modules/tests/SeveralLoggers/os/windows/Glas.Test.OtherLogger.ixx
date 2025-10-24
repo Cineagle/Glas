@@ -16,41 +16,41 @@ export namespace Glas::Test
 {
 	class OtherLogger :
 		public
-			Glas::Logger<
-				Glas::InfoEntry<
-					Glas::TimePointField, Glas::LoggerNameField, Glas::MessageField
+			Logger<
+				InfoEntry<
+					TimePointField, LoggerNameField, MessageField
 				>
 			>
 	{
 	public:
-		using Info = Glas::InfoEntry<
-			Glas::TimePointField, Glas::LoggerNameField, Glas::MessageField
+		using Info = InfoEntry<
+			TimePointField, LoggerNameField, MessageField
 		>;
 	private:
 		OtherLogger(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme,
+			const Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
 		static std::shared_ptr<OtherLogger> create(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
+			const Queue::Scheme queueScheme = Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
 		void createOutput() &;
 		void tune() &;
 		void tuneInfoEntry() &;
 	private:
-		std::shared_ptr<Glas::Output<>> file;
+		std::shared_ptr<Output<>> file;
 	};
 }
 
 export namespace Glas::Test
 {
 	OtherLogger::OtherLogger(StringLike auto&& loggerName,
-		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
+		const Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
-		Glas::Logger<
-			Glas::InfoEntry<
-				Glas::TimePointField, Glas::LoggerNameField, Glas::MessageField
+		Logger<
+			InfoEntry<
+				TimePointField, LoggerNameField, MessageField
 			>
 		>{ std::forward<decltype(loggerName)>(loggerName), queueScheme, queueCapacity }
 	{
@@ -59,7 +59,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<OtherLogger> OtherLogger::create(
-		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<OtherLogger>{
@@ -70,8 +70,8 @@ export namespace Glas::Test
 	}
 
 	void OtherLogger::createOutput() & {
-		file = Glas::FileStringOutput::create("OtherLogger.txt",
-			Glas::FileStringOutput::PathType::Relative);
+		file = FileStringOutput::create("OtherLogger.txt",
+			FileStringOutput::PathType::Relative);
 	}
 
 	void OtherLogger::tune() & {
@@ -83,9 +83,9 @@ export namespace Glas::Test
 		this->InfoEntry::LoggerNameField::enable();
 		this->InfoEntry::MessageField::enable();
 
-		this->InfoEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::LoggerNameField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->InfoEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::LoggerNameField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->InfoEntry::outputs(file);
 	}

@@ -13,8 +13,8 @@ export import std;
 export namespace Glas::Test
 {
     class UserNameField :
-        public Glas::PaddingProperty,
-        public Glas::VTSequence
+        public PaddingProperty,
+        public VTSequence
     {
     public:
         UserNameField(const UserNameField& other);
@@ -42,8 +42,8 @@ export namespace Glas::Test
 export namespace Glas::Test
 {
     UserNameField::UserNameField(const UserNameField& other) :
-        Glas::PaddingProperty{ other },
-        Glas::VTSequence{ other }
+        PaddingProperty{ other },
+        VTSequence{ other }
     {
         enabled.store(other.enabled.load(std::memory_order_relaxed), std::memory_order_relaxed);
     }
@@ -87,7 +87,7 @@ export namespace Glas::Test
             text.append(paddingSnapshot->breakAfter);
         }
 
-        Glas::StringOutputFormat formatted;
+        StringOutputFormat formatted;
 
         if (VTSequence::enabled.load(std::memory_order_relaxed)) {
             const auto userVTBegin = vtBegin.load(std::memory_order_relaxed);

@@ -10,11 +10,11 @@ export import std;
 export namespace Glas::Test
 {
 	class BinaryOutputFile final :
-		public Glas::File,
-		public Glas::Output<std::vector<std::byte>>
+		public File,
+		public Output<std::vector<std::byte>>
 	{
 	public:
-		using Glas::File::PathType;
+		using File::PathType;
 	public:
 		virtual ~BinaryOutputFile() override;
 	private:
@@ -50,11 +50,11 @@ export namespace Glas::Test
 	BinaryOutputFile::BinaryOutputFile(StringLike auto&& path, const PathType pathType,
 		const std::size_t flushSize, const std::ios_base::openmode openMode) :
 
-		Glas::File{ std::forward<decltype(path)>(path), pathType, flushSize, openMode }
+		File{ std::forward<decltype(path)>(path), pathType, flushSize, openMode }
 	{}
 
 	BinaryOutputFile::BinaryOutputFile(const std::string_view id) :
-		Glas::File{ id }
+		File{ id }
 	{}
 
 	BinaryOutputFile::~BinaryOutputFile() {

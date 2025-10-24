@@ -124,9 +124,7 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
-        if (self.BytesEntry<Mixins...>::Entry::outputScheme.load(std::memory_order_relaxed) ==
-            Scheme::Queue) 
-        {
+        if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
         else {

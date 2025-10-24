@@ -71,8 +71,8 @@ export namespace Glas
     }
 
     template <ErrorEntryMixins... Mixins>
-    void ErrorEntry<Mixins...>::error(this auto& self, 
-        StringLike auto&& message, const std::source_location location)
+    void ErrorEntry<Mixins...>::error(this auto& self, StringLike auto&& message, 
+        const std::source_location location)
     {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {
@@ -95,9 +95,7 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
-        if (self.ErrorEntry<Mixins...>::Entry::outputScheme.load(std::memory_order_relaxed) == 
-            Scheme::Queue)
-        {
+        if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
         else {

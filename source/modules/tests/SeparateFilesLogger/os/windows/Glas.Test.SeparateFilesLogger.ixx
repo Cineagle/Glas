@@ -19,22 +19,22 @@ export namespace Glas::Test
 {
 	class SeparateFilesLogger :
 		public 
-			Glas::Logger<
-				Glas::InfoEntry<
-					Glas::TimePointField, Glas::MessageField
+			Logger<
+				InfoEntry<
+					TimePointField, MessageField
 				>,
-				Glas::ErrorEntry<
-					Glas::TimePointField, Glas::MessageField, Glas::ErrorCodeField
+				ErrorEntry<
+					TimePointField, MessageField, ErrorCodeField
 				>
 			>
 	{
 	private:
 		SeparateFilesLogger(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme,
+			const Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
 		static std::shared_ptr<SeparateFilesLogger> create(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
+			const Queue::Scheme queueScheme = Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
 		void createOutputs() &;
@@ -42,24 +42,24 @@ export namespace Glas::Test
 		void tuneInfoEntry() &;
 		void tuneErrorEntry() &;
 	private:
-		std::shared_ptr<Glas::Output<>> console;
-		std::shared_ptr<Glas::Output<>> infoEntryFile;
-		std::shared_ptr<Glas::Output<>> errorEntryFile;
-		std::shared_ptr<Glas::Output<>> debug;
+		std::shared_ptr<Output<>> console;
+		std::shared_ptr<Output<>> infoEntryFile;
+		std::shared_ptr<Output<>> errorEntryFile;
+		std::shared_ptr<Output<>> debug;
 	};
 }
 
 export namespace Glas::Test
 {
 	SeparateFilesLogger::SeparateFilesLogger(StringLike auto&& loggerName,
-		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
+		const Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
-		Glas::Logger<
-			Glas::InfoEntry<
-				Glas::TimePointField, Glas::MessageField
+		Logger<
+			InfoEntry<
+				TimePointField, MessageField
 			>,
-			Glas::ErrorEntry<
-				Glas::TimePointField, Glas::MessageField, Glas::ErrorCodeField
+			ErrorEntry<
+				TimePointField, MessageField, ErrorCodeField
 			>
 		>{ std::forward<decltype(loggerName)>(loggerName), queueScheme, queueCapacity }
 	{
@@ -68,7 +68,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<SeparateFilesLogger> SeparateFilesLogger::create(
-		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<SeparateFilesLogger>{
@@ -79,19 +79,19 @@ export namespace Glas::Test
 	}
 
 	void SeparateFilesLogger::createOutputs() & {
-		console = Glas::ConsoleStringOutput::create(
-			Glas::ConsoleConfig{
+		console = ConsoleStringOutput::create(
+			ConsoleConfig{
 				.consoleTitle{ L"SeparateFilesLogger" },
 				.fontFaceName{ L"Cascadia Mono" }
 			}
 		);
 
-		infoEntryFile = Glas::FileStringOutput::create("SeparateFilesLogger 1.txt",
-			Glas::FileStringOutput::PathType::Relative);
-		errorEntryFile = Glas::FileStringOutput::create("SeparateFilesLogger 2.txt",
-			Glas::FileStringOutput::PathType::Relative);
+		infoEntryFile = FileStringOutput::create("SeparateFilesLogger 1.txt",
+			FileStringOutput::PathType::Relative);
+		errorEntryFile = FileStringOutput::create("SeparateFilesLogger 2.txt",
+			FileStringOutput::PathType::Relative);
 
-		debug = Glas::DebugStringOutput::create();
+		debug = DebugStringOutput::create();
 	}
 
 	void SeparateFilesLogger::tune() & {
@@ -103,8 +103,8 @@ export namespace Glas::Test
 		this->InfoEntry::TimePointField::enable();
 		this->InfoEntry::MessageField::enable();
 
-		this->InfoEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->InfoEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->InfoEntry::outputs(infoEntryFile, console);
 	}
@@ -114,9 +114,9 @@ export namespace Glas::Test
 		this->ErrorEntry::MessageField::enable();
 		this->ErrorEntry::ErrorCodeField::enable();
 
-		this->ErrorEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->ErrorEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->ErrorEntry::ErrorCodeField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->ErrorEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::ErrorCodeField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->ErrorEntry::outputs(debug, errorEntryFile, console);
 	}

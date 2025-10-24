@@ -29,50 +29,50 @@ export namespace Glas::Test
 {
 	class MaxiLogger :
 		public
-			Glas::Logger<
-				Glas::InfoEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField, Glas::ErrorCodeField,
-					Glas::LocationField
+			Logger<
+				InfoEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField, ErrorCodeField,
+					LocationField
 				>,
-				Glas::SuccessEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField, Glas::ErrorCodeField,
-					Glas::LocationField
+				SuccessEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField, ErrorCodeField,
+					LocationField
 				>,
-				Glas::WarningEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField, Glas::ErrorCodeField,
-					Glas::LocationField
+				WarningEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField, ErrorCodeField,
+					LocationField
 				>,
-				Glas::ErrorEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField, Glas::ErrorCodeField,
-					Glas::LocationField
+				ErrorEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField, ErrorCodeField,
+					LocationField
 				>,
-				Glas::LinesEntry<
-					Glas::MessageField 
+				LinesEntry<
+					MessageField 
 					/* 
 						We can also add all other fields, but this is not nessasary.
 						for the LinesEntry.
 					*/
 				>,
-				Glas::SequenceEntry<
-					Glas::MessageField 
+				SequenceEntry<
+					MessageField 
 					/* 
 						We can also add all other fields, but this is not nessasary.
 						for the SequenceEntry.
 					*/
 				>,
-				Glas::TraceEntry<
-					Glas::MessageField 
+				TraceEntry<
+					MessageField 
 					/* 
 						We can also add all other fields, but this is not nessasary.
 						for the TraceEntry.
 					*/
 				>,
-				Glas::BytesEntry<
-					Glas::MessageField 
+				BytesEntry<
+					MessageField 
 					/* 
 						We can also add all other fields, but this is not nessasary.
 						for the BytesEntry.
@@ -82,11 +82,11 @@ export namespace Glas::Test
 	{
 	private:
 		MaxiLogger(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme,
+			const Queue::Scheme queueScheme,
 			const std::size_t queueCapacity);
 	public:
 		static std::shared_ptr<MaxiLogger> create(StringLike auto&& loggerName,
-			const Glas::Queue::Scheme queueScheme = Glas::Queue::Scheme::Bound,
+			const Queue::Scheme queueScheme = Queue::Scheme::Bound,
 			const std::size_t queueCapacity = 1024);
 	private:
 		void createOutputs() &;
@@ -100,49 +100,49 @@ export namespace Glas::Test
 		void tuneTraceEntry() &;
 		void tuneBytesEntry() &;
 	private:
-		std::shared_ptr<Glas::Output<>> console;
-		std::shared_ptr<Glas::Output<>> file;
-		std::shared_ptr<Glas::Output<>> debug;
+		std::shared_ptr<Output<>> console;
+		std::shared_ptr<Output<>> file;
+		std::shared_ptr<Output<>> debug;
 	};
 }
 
 export namespace Glas::Test
 {
 	MaxiLogger::MaxiLogger(StringLike auto&& loggerName,
-		const Glas::Queue::Scheme queueScheme, const std::size_t queueCapacity) :
+		const Queue::Scheme queueScheme, const std::size_t queueCapacity) :
 
-			Glas::Logger<
-				Glas::InfoEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField, Glas::ErrorCodeField,
-					Glas::LocationField
+			Logger<
+				InfoEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField, ErrorCodeField,
+					LocationField
 				>,
-				Glas::SuccessEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField, Glas::ErrorCodeField,
-					Glas::LocationField
+				SuccessEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField, ErrorCodeField,
+					LocationField
 				>,
-				Glas::WarningEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField, Glas::ErrorCodeField,
-					Glas::LocationField
+				WarningEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField, ErrorCodeField,
+					LocationField
 				>,
-				Glas::ErrorEntry<
-					Glas::TimePointField, Glas::TypeField, Glas::LoggerNameField,
-					Glas::ThreadIDField, Glas::MessageField, Glas::ErrorCodeField,
-					Glas::LocationField
+				ErrorEntry<
+					TimePointField, TypeField, LoggerNameField,
+					ThreadIDField, MessageField, ErrorCodeField,
+					LocationField
 				>,
-				Glas::LinesEntry<
-					Glas::MessageField
+				LinesEntry<
+					MessageField
 				>,
-				Glas::SequenceEntry<
-					Glas::MessageField
+				SequenceEntry<
+					MessageField
 				>,
-				Glas::TraceEntry<
-					Glas::MessageField
+				TraceEntry<
+					MessageField
 				>,
-				Glas::BytesEntry<
-					Glas::MessageField
+				BytesEntry<
+					MessageField
 				>
 		>{ std::forward<decltype(loggerName)>(loggerName), queueScheme, queueCapacity }
 	{
@@ -151,7 +151,7 @@ export namespace Glas::Test
 	}
 
 	std::shared_ptr<MaxiLogger> MaxiLogger::create(
-		StringLike auto&& loggerName, const Glas::Queue::Scheme queueScheme,
+		StringLike auto&& loggerName, const Queue::Scheme queueScheme,
 		const std::size_t queueCapacity)
 	{
 		auto ptr = std::unique_ptr<MaxiLogger>{
@@ -162,18 +162,18 @@ export namespace Glas::Test
 	}
 
 	void MaxiLogger::createOutputs() & {
-		console = Glas::ConsoleStringOutput::create(
-			Glas::ConsoleConfig{
+		console = ConsoleStringOutput::create(
+			ConsoleConfig{
 				.consoleTitle{ L"ColoredLogger" },
 				.fontFaceName{ L"Cascadia Mono" },
 				.vtEnabled{ true }
 			}
 		);
 
-		file = Glas::FileStringOutput::create("MaxiLogger.txt",
-			Glas::FileStringOutput::PathType::Relative);
+		file = FileStringOutput::create("MaxiLogger.txt",
+			FileStringOutput::PathType::Relative);
 
-		debug = Glas::DebugStringOutput::create();
+		debug = DebugStringOutput::create();
 	}
 
 	void MaxiLogger::tune() & {
@@ -196,13 +196,13 @@ export namespace Glas::Test
 		this->InfoEntry::ErrorCodeField::enable();
 		this->InfoEntry::LocationField::enable();
 
-		this->InfoEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::TypeField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::LoggerNameField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::ThreadIDField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->InfoEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->InfoEntry::ErrorCodeField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->InfoEntry::LocationField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->InfoEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::TypeField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::LoggerNameField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::ThreadIDField::padding(Padding{ .spaceAfter{ 2 } });
+		this->InfoEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
+		this->InfoEntry::ErrorCodeField::padding(Padding{ .breakAfter{ 1 } });
+		this->InfoEntry::LocationField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->InfoEntry::TimePointField::VTSequence::enable();
 		this->InfoEntry::TypeField::VTSequence::enable();
@@ -224,13 +224,13 @@ export namespace Glas::Test
 		this->SuccessEntry::ErrorCodeField::enable();
 		this->SuccessEntry::LocationField::enable();
 
-		this->SuccessEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->SuccessEntry::TypeField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->SuccessEntry::LoggerNameField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->SuccessEntry::ThreadIDField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->SuccessEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->SuccessEntry::ErrorCodeField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->SuccessEntry::LocationField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->SuccessEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->SuccessEntry::TypeField::padding(Padding{ .spaceAfter{ 2 } });
+		this->SuccessEntry::LoggerNameField::padding(Padding{ .spaceAfter{ 2 } });
+		this->SuccessEntry::ThreadIDField::padding(Padding{ .spaceAfter{ 2 } });
+		this->SuccessEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
+		this->SuccessEntry::ErrorCodeField::padding(Padding{ .breakAfter{ 1 } });
+		this->SuccessEntry::LocationField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->SuccessEntry::TimePointField::VTSequence::enable();
 		this->SuccessEntry::TypeField::VTSequence::enable();
@@ -252,13 +252,13 @@ export namespace Glas::Test
 		this->WarningEntry::ErrorCodeField::enable();
 		this->WarningEntry::LocationField::enable();
 
-		this->WarningEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->WarningEntry::TypeField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->WarningEntry::LoggerNameField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->WarningEntry::ThreadIDField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->WarningEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->WarningEntry::ErrorCodeField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->WarningEntry::LocationField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->WarningEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->WarningEntry::TypeField::padding(Padding{ .spaceAfter{ 2 } });
+		this->WarningEntry::LoggerNameField::padding(Padding{ .spaceAfter{ 2 } });
+		this->WarningEntry::ThreadIDField::padding(Padding{ .spaceAfter{ 2 } });
+		this->WarningEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
+		this->WarningEntry::ErrorCodeField::padding(Padding{ .breakAfter{ 1 } });
+		this->WarningEntry::LocationField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->WarningEntry::TimePointField::VTSequence::enable();
 		this->WarningEntry::TypeField::VTSequence::enable();
@@ -280,13 +280,13 @@ export namespace Glas::Test
 		this->ErrorEntry::ErrorCodeField::enable();
 		this->ErrorEntry::LocationField::enable();
 
-		this->ErrorEntry::TimePointField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->ErrorEntry::TypeField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->ErrorEntry::LoggerNameField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->ErrorEntry::ThreadIDField::padding(Glas::Padding{ .spaceAfter{ 2 } });
-		this->ErrorEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->ErrorEntry::ErrorCodeField::padding(Glas::Padding{ .breakAfter{ 1 } });
-		this->ErrorEntry::LocationField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::TimePointField::padding(Padding{ .spaceAfter{ 2 } });
+		this->ErrorEntry::TypeField::padding(Padding{ .spaceAfter{ 2 } });
+		this->ErrorEntry::LoggerNameField::padding(Padding{ .spaceAfter{ 2 } });
+		this->ErrorEntry::ThreadIDField::padding(Padding{ .spaceAfter{ 2 } });
+		this->ErrorEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::ErrorCodeField::padding(Padding{ .breakAfter{ 1 } });
+		this->ErrorEntry::LocationField::padding(Padding{ .breakAfter{ 1 } });
 
 		this->ErrorEntry::TimePointField::VTSequence::enable();
 		this->ErrorEntry::TypeField::VTSequence::enable();
@@ -306,23 +306,23 @@ export namespace Glas::Test
 
 	void MaxiLogger::tuneSequenceEntry() & {
 		this->SequenceEntry::MessageField::enable();
-		this->SequenceEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->SequenceEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
 		this->SequenceEntry::outputs(console, file, debug);
 	}
 
 	void MaxiLogger::tuneTraceEntry() & {
 		this->TraceEntry::MessageField::enable();
-		this->TraceEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->TraceEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
 		this->TraceEntry::outputs(console, file, debug);
 	}
 
 	void MaxiLogger::tuneBytesEntry() & {
 		this->BytesEntry::MessageField::enable();
-		this->BytesEntry::MessageField::padding(Glas::Padding{ .breakAfter{ 1 } });
+		this->BytesEntry::MessageField::padding(Padding{ .breakAfter{ 1 } });
 
 		//this->BytesEntry::MessageField::VTSequence::enable();
 		//this->BytesEntry::MessageField::style(
-		//	Glas::VTStyle{
+		//	VTStyle{
 		//		.fgColor{.red{ 50 }, .green{ 50 }, .blue{ 200 } }
 		//	}
 		//);

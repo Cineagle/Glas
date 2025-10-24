@@ -11,7 +11,7 @@ export import std;
 export namespace Glas::Test
 {
 	class WindowsEventOutput final :
-		public Glas::Output<std::vector<Glas::StringOutputFormat>>
+		public Output<std::vector<StringOutputFormat>>
 	{
 	public:
 		virtual ~WindowsEventOutput() override;
@@ -25,7 +25,7 @@ export namespace Glas::Test
 	public:
 		static std::shared_ptr<WindowsEventOutput> create();
 	public:
-		virtual void output(const std::vector<Glas::StringOutputFormat>& formatted) & override;
+		virtual void output(const std::vector<StringOutputFormat>& formatted) & override;
 	private:
 		HANDLE event{};
 		std::mutex outputMutex;
@@ -54,7 +54,7 @@ export namespace Glas::Test
 		return std::shared_ptr<WindowsEventOutput>(std::move(ptr));
 	}
 
-	void WindowsEventOutput::output(const std::vector<Glas::StringOutputFormat>& formatted) & {
+	void WindowsEventOutput::output(const std::vector<StringOutputFormat>& formatted) & {
 		const std::lock_guard lock{ outputMutex };
 
 		for (const auto& item : formatted) {
