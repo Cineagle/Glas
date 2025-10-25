@@ -13,7 +13,7 @@ export import std;
 
 export namespace Glas
 {
-	class ConsoleConfig final {
+	class ConsoleDesc final {
 	public:
 		std::wstring consoleTitle{ L"Console" };
 		std::wstring fontFaceName{ L"Consolas" };
@@ -30,7 +30,7 @@ export namespace Glas
 	public:
 		virtual ~ConsoleStringOutput() override;
 	private:
-		explicit ConsoleStringOutput(std::same_as<ConsoleConfig> auto&& config);
+		explicit ConsoleStringOutput(std::same_as<ConsoleDesc> auto&& desc);
 
 		ConsoleStringOutput() = delete;
 		ConsoleStringOutput(const ConsoleStringOutput&) = delete;
@@ -38,8 +38,7 @@ export namespace Glas
 		ConsoleStringOutput(ConsoleStringOutput&&) noexcept = delete;
 		ConsoleStringOutput& operator=(ConsoleStringOutput&&) noexcept = delete;
 	public:
-		template <std::same_as<ConsoleConfig> T>
-		static std::shared_ptr<ConsoleStringOutput> create(T&& config);
+		static std::shared_ptr<ConsoleStringOutput> create(std::same_as<ConsoleDesc> auto&& desc);
 	public:
 		virtual void output(const std::vector<StringOutputFormat>& formatted) & override;
 	private:
@@ -60,7 +59,7 @@ export namespace Glas
 
 		static constexpr std::string_view vtEnd{ "\x1b[0m" };
 	private:
-		ConsoleConfig config;
+		ConsoleDesc desc;
 
 		CONSOLE_FONT_INFOEX fontInfoOrig{};
 		CONSOLE_SCREEN_BUFFER_INFO bufferInfoOrig{};
@@ -78,15 +77,14 @@ export namespace Glas
 
 export namespace Glas
 {
-	template <std::same_as<ConsoleConfig> T>
-	ConsoleStringOutput::ConsoleStringOutput(T&& config) :
-		config{ std::forward<T>(config) }
+	ConsoleStringOutput::ConsoleStringOutput(std::same_as<ConsoleDesc> auto&& desc) :
+		desc{ std::forward<decltype(desc)>(desc) }
 	{
-		if (this->config.fontFaceName.empty()) {
-			throw Exception{ "`config.fontFaceName` length is empty." };
+		if (this->desc.fontFaceName.empty()) {
+			throw Exception{ "`desc.fontFaceName` length is empty." };
 		}
-		if (this->config.fontFaceName.length() > LF_FACESIZE) {
-			throw Exception{ "`config.fontFaceName` length > LF_FACESIZE." };
+		if (this->desc.fontFaceName.length() > LF_FACESIZE) {
+			throw Exception{ "`desc.fontFaceName` length > LF_FACESIZE." };
 		}
 		initConsole();
 	}
@@ -98,16 +96,15 @@ export namespace Glas
 		created = false;
 	}
 
-	template <std::same_as<ConsoleConfig> T>
-	std::shared_ptr<ConsoleStringOutput> ConsoleStringOutput::create(T&& config) {
+	std::shared_ptr<ConsoleStringOutput> ConsoleStringOutput::create(std::same_as<ConsoleDesc> auto&& desc) {
 		const std::lock_guard lock{ createdMutex };
 
 		if (created) {
-			throw Exception{ "`ConsoleConfig` class accept only one instance." };
+			throw Exception{ "`ConsoleDesc` class accept only one instance." };
 		}
 
 		auto ptr = std::unique_ptr<ConsoleStringOutput>{
-			new ConsoleStringOutput(std::forward<T>(config))
+			new ConsoleStringOutput(std::forward<decltype(desc)>(desc))
 		};
 		created = true;
 
@@ -146,13 +143,13 @@ export namespace Glas
 		}
 
 		fontInfoOrig = info;
-		info.dwFontSize.X = config.fontSizeX;
-		info.dwFontSize.Y = config.fontSizeY;
-		info.FontWeight = config.fontWeight;
+		info.dwFontSize.X = desc.fontSizeX;
+		info.dwFontSize.Y = desc.fontSizeY;
+		info.FontWeight = desc.fontWeight;
 
 		Glas::WCharBufferWriter writer{ info.FaceName };
 
-		const auto result = writer.assign(config.fontFaceName);
+		const auto result = writer.assign(desc.fontFaceName);
 		if (result != Glas::WCharBufferWriter::Result::Success) {
 			throw Exception{ "`WCharBufferWriter` failed." };
 		}
@@ -185,13 +182,13 @@ export namespace Glas
 
 		titleOrig = title;
 
-		if (!SetConsoleTitleW(config.consoleTitle.c_str())) {
+		if (!SetConsoleTitleW(desc.consoleTitle.c_str())) {
 			throw Exception{ "`SetConsoleTitleW` failed." };
 		}
 	}
 	
 	void ConsoleStringOutput::enableVTMode() & {
-		if (config.vtEnabled) {
+		if (desc.vtEnabled) {
 			if (!GetConsoleMode(outHandle, &modeOrig)) {
 				throw Exception{ "`GetConsoleMode` failed." };
 			}

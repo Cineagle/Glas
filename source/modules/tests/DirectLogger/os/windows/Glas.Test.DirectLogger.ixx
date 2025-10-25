@@ -87,7 +87,7 @@ export namespace Glas::Test
 
 	void DirectLogger::createOutputs() & {
 		console = ConsoleStringOutput::create(
-			ConsoleConfig{
+			ConsoleDesc{
 				.consoleTitle{ L"DirectLogger" },
 				.fontFaceName{ L"Cascadia Mono" }
 			}

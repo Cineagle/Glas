@@ -87,7 +87,7 @@ export namespace Glas::Test
 
 	void MiniLogger::createOutputs() & {
 		console = ConsoleStringOutput::create(
-			ConsoleConfig{
+			ConsoleDesc{
 				.consoleTitle{ L"MiniLogger" },
 				.fontFaceName{ L"Cascadia Mono" }
 			}

@@ -80,7 +80,7 @@ export namespace Glas::Test
 
 	void SeparateFilesLogger::createOutputs() & {
 		console = ConsoleStringOutput::create(
-			ConsoleConfig{
+			ConsoleDesc{
 				.consoleTitle{ L"SeparateFilesLogger" },
 				.fontFaceName{ L"Cascadia Mono" }
 			}

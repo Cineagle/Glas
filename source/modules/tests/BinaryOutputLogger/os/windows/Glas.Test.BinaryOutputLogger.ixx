@@ -93,7 +93,7 @@ export namespace Glas::Test
 
 	void BinaryOutputLogger::createOutputs() & {
 		console = ConsoleStringOutput::create(
-			ConsoleConfig{
+			ConsoleDesc{
 				.consoleTitle{ L"BinaryOutputLogger" },
 				.fontFaceName{ L"Cascadia Mono" }
 			}

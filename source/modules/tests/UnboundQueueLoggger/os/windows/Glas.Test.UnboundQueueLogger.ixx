@@ -89,7 +89,7 @@ export namespace Glas::Test
 
 	void UnboundQueueLogger::createOutputs() & {
 		console = ConsoleStringOutput::create(
-			ConsoleConfig{
+			ConsoleDesc{
 				.consoleTitle{ L"UnboundQueueLogger" },
 				.fontFaceName{ L"Cascadia Mono" }
 			}

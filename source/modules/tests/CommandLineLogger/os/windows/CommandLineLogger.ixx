@@ -87,7 +87,7 @@ export namespace Glas::Test
 
 	void CommandLineLogger::createOutputs() & {
 		console = ConsoleStringOutput::create(
-			ConsoleConfig{
+			ConsoleDesc{
 				.consoleTitle{ L"CommandLineLogger" },
 				.fontFaceName{ L"Cascadia Mono" }
 			}

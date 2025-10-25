@@ -87,7 +87,7 @@ export namespace Glas::Test
 
 	void CustomEntryLogger::createOutputs() & {
 		console = ConsoleStringOutput::create(
-			ConsoleConfig{
+			ConsoleDesc{
 				.consoleTitle{ L"CustomEntryLogger" },
 				.fontFaceName{ L"Cascadia Mono" },
 				.vtEnabled{ true }

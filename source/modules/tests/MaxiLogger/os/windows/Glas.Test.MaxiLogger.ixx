@@ -163,7 +163,7 @@ export namespace Glas::Test
 
 	void MaxiLogger::createOutputs() & {
 		console = ConsoleStringOutput::create(
-			ConsoleConfig{
+			ConsoleDesc{
 				.consoleTitle{ L"ColoredLogger" },
 				.fontFaceName{ L"Cascadia Mono" },
 				.vtEnabled{ true }
