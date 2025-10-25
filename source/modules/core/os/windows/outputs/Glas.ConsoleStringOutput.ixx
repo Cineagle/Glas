@@ -7,6 +7,7 @@ export import Glas.Output;
 export import Glas.BasicCharBufferWriter;
 export import Glas.StringOutputFormat;
 export import Glas.VTSequence;
+export import Glas.Concepts;
 export import Glas.Exception;
 export import std;
 
@@ -30,7 +31,7 @@ export namespace Glas
 	public:
 		virtual ~ConsoleStringOutput() override;
 	private:
-		explicit ConsoleStringOutput(std::same_as<ConsoleDesc> auto&& desc);
+		explicit ConsoleStringOutput(ForwardedAs<ConsoleDesc> auto&& desc);
 
 		ConsoleStringOutput() = delete;
 		ConsoleStringOutput(const ConsoleStringOutput&) = delete;
@@ -38,7 +39,7 @@ export namespace Glas
 		ConsoleStringOutput(ConsoleStringOutput&&) noexcept = delete;
 		ConsoleStringOutput& operator=(ConsoleStringOutput&&) noexcept = delete;
 	public:
-		static std::shared_ptr<ConsoleStringOutput> create(std::same_as<ConsoleDesc> auto&& desc);
+		static std::shared_ptr<ConsoleStringOutput> create(ForwardedAs<ConsoleDesc> auto&& desc);
 	public:
 		virtual void output(const std::vector<StringOutputFormat>& formatted) & override;
 	private:
@@ -77,7 +78,7 @@ export namespace Glas
 
 export namespace Glas
 {
-	ConsoleStringOutput::ConsoleStringOutput(std::same_as<ConsoleDesc> auto&& desc) :
+	ConsoleStringOutput::ConsoleStringOutput(ForwardedAs<ConsoleDesc> auto&& desc) :
 		desc{ std::forward<decltype(desc)>(desc) }
 	{
 		if (this->desc.fontFaceName.empty()) {
@@ -96,7 +97,7 @@ export namespace Glas
 		created = false;
 	}
 
-	std::shared_ptr<ConsoleStringOutput> ConsoleStringOutput::create(std::same_as<ConsoleDesc> auto&& desc) {
+	std::shared_ptr<ConsoleStringOutput> ConsoleStringOutput::create(ForwardedAs<ConsoleDesc> auto&& desc) {
 		const std::lock_guard lock{ createdMutex };
 
 		if (created) {

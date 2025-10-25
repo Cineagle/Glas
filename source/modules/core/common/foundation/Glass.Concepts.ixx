@@ -18,4 +18,8 @@ export namespace Glas
     concept WStringLike =
         std::convertible_to<T, std::wstring_view> ||
         std::convertible_to<T, std::wstring>;
+
+    template <typename T, typename U>
+    concept ForwardedAs =
+        std::same_as<std::remove_cvref_t<T>, U>;
 }
