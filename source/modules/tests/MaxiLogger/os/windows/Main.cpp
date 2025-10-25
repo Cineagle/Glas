@@ -35,8 +35,8 @@ void testLogger(std::shared_ptr<Glas::Test::MaxiLogger> logger) {
     logger->bytes({ "bytes with {} message\n", "formated" }, &value, sizeof(value));
 }
 
-int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
-    _In_ LPWSTR lpCmdLine, _In_ int nCmdShow) 
+int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, 
+    _In_ int nCmdShow) 
 {
     try {
         auto logger = Glas::Test::MaxiLogger::create("MaxiLogger");

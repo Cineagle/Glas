@@ -16,8 +16,8 @@ void testLogger(std::shared_ptr<Glas::Test::UnboundQueueLogger> logger) {
     logger->error({ "error text {}", 2 });
 }
 
-int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
-    _In_ LPWSTR lpCmdLine, _In_ int nCmdShow) 
+int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, 
+    _In_ int nCmdShow) 
 {
     try {
         auto logger = Glas::Test::UnboundQueueLogger::create("UnboundQueueLogger",

@@ -19,7 +19,9 @@ void testLogger(std::shared_ptr<Glas::Test::BinaryOutputLogger> logger) {
     logger->value<int>(&speed);
 }
 
-int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow) {
+int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine,
+    _In_ int nCmdShow) 
+{
     try {
         auto logger = Glas::Test::BinaryOutputLogger::create("BinaryOutputLogger");
         testLogger(logger);
