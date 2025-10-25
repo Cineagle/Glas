@@ -1,5 +1,5 @@
 export module Glas.Exception;
-import std;
+export import std;
 
 
 export namespace Glas

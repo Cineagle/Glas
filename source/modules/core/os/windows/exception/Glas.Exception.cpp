@@ -2,7 +2,6 @@ module;
 #include <windows.h>
 
 module Glas.Exception;
-import std;
 
 
 namespace Glas
