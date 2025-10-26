@@ -101,7 +101,7 @@ export namespace Glas
 		const std::lock_guard lock{ createdMutex };
 
 		if (created) {
-			throw Exception{ "`ConsoleDesc` class accept only one instance." };
+			throw Exception{ "`ConsoleStringOutput` class accept only one instance." };
 		}
 
 		auto ptr = std::unique_ptr<ConsoleStringOutput>{
