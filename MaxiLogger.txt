@@ -1,0 +1,169 @@
+26.10.2025 13:46:58  [Info]  [MaxiLogger]  [28336]  info text 1
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`
+*Location:*
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 9
+- Column: 13
+- Function: `void __cdecl testLogger(class std::shared_ptr<class Glas::Test::MaxiLogger[Glas.Test.MaxiLogger]>)`
+26.10.2025 13:46:58  [Success]  [MaxiLogger]  [28336]  success text 1
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`
+*Location:*
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 10
+- Column: 13
+- Function: `void __cdecl testLogger(class std::shared_ptr<class Glas::Test::MaxiLogger[Glas.Test.MaxiLogger]>)`
+26.10.2025 13:46:58  [Warning]  [MaxiLogger]  [28336]  warning text 1
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`
+*Location:*
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 11
+- Column: 13
+- Function: `void __cdecl testLogger(class std::shared_ptr<class Glas::Test::MaxiLogger[Glas.Test.MaxiLogger]>)`
+26.10.2025 13:46:58  [Error]  [MaxiLogger]  [28336]  error text 1
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`
+*Location:*
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 12
+- Column: 13
+- Function: `void __cdecl testLogger(class std::shared_ptr<class Glas::Test::MaxiLogger[Glas.Test.MaxiLogger]>)`
+
+
+26.10.2025 13:46:58  [Info]  [MaxiLogger]  [28336]  info text 2
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`
+*Location:*
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 16
+- Column: 13
+- Function: `void __cdecl testLogger(class std::shared_ptr<class Glas::Test::MaxiLogger[Glas.Test.MaxiLogger]>)`
+26.10.2025 13:46:58  [Success]  [MaxiLogger]  [28336]  success text 2
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`
+*Location:*
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 17
+- Column: 13
+- Function: `void __cdecl testLogger(class std::shared_ptr<class Glas::Test::MaxiLogger[Glas.Test.MaxiLogger]>)`
+26.10.2025 13:46:58  [Warning]  [MaxiLogger]  [28336]  warning text 2
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`
+*Location:*
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 18
+- Column: 13
+- Function: `void __cdecl testLogger(class std::shared_ptr<class Glas::Test::MaxiLogger[Glas.Test.MaxiLogger]>)`
+26.10.2025 13:46:58  [Error]  [MaxiLogger]  [28336]  error text 2
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`
+*Location:*
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 19
+- Column: 13
+- Function: `void __cdecl testLogger(class std::shared_ptr<class Glas::Test::MaxiLogger[Glas.Test.MaxiLogger]>)`
+
+
+AA
+Repeated Repeated Repeated Repeated Repeated 
+Repeated 3 times Repeated 3 times Repeated 3 times 
+-----------------------------------------------
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 43
+- Function: `Glas!wWinMain+0xB8`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl`
+- Line: 123
+- Function: `Glas!invoke_main+0x32`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl`
+- Line: 288
+- Function: `Glas!__scrt_common_main_seh+0x132`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl`
+- Line: 331
+- Function: `Glas!__scrt_common_main+0xE`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_wwinmain.cpp`
+- Line: 17
+- Function: `Glas!wWinMainCRTStartup+0xE`
+-----------------------------------------------
+- File: ``
+- Line: 0
+- Function: `KERNEL32!BaseThreadInitThunk+0x17`
+-----------------------------------------------
+- File: ``
+- Line: 0
+- Function: `ntdll!RtlUserThreadStart+0x2C`
+-----------------------------------------------
+trace with message
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl`
+- Line: 123
+- Function: `Glas!invoke_main+0x32`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl`
+- Line: 288
+- Function: `Glas!__scrt_common_main_seh+0x132`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl`
+- Line: 331
+- Function: `Glas!__scrt_common_main+0xE`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_wwinmain.cpp`
+- Line: 17
+- Function: `Glas!wWinMainCRTStartup+0xE`
+-----------------------------------------------
+- File: ``
+- Line: 0
+- Function: `KERNEL32!BaseThreadInitThunk+0x17`
+-----------------------------------------------
+- File: ``
+- Line: 0
+- Function: `ntdll!RtlUserThreadStart+0x2C`
+-----------------------------------------------
+trace with formated message
+-----------------------------------------------
+- File: `F:\Programs\Programming\Projects\Glas\source\modules\tests\MaxiLogger\os\windows\Main.cpp`
+- Line: 43
+- Function: `Glas!wWinMain+0xB8`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl`
+- Line: 123
+- Function: `Glas!invoke_main+0x32`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl`
+- Line: 288
+- Function: `Glas!__scrt_common_main_seh+0x132`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_common.inl`
+- Line: 331
+- Function: `Glas!__scrt_common_main+0xE`
+-----------------------------------------------
+- File: `D:\a\_work\1\s\src\vctools\crt\vcstartup\src\startup\exe_wwinmain.cpp`
+- Line: 17
+- Function: `Glas!wWinMainCRTStartup+0xE`
+-----------------------------------------------
+- File: ``
+- Line: 0
+- Function: `KERNEL32!BaseThreadInitThunk+0x17`
+-----------------------------------------------
+- File: ``
+- Line: 0
+- Function: `ntdll!RtlUserThreadStart+0x2C`
+-----------------------------------------------
+15 CD 5B 07 00 00 00 00
+bytes with message
+15 CD 5B 07 00 00 00 00
+bytes with formated message
+15 CD 5B 07 00 00 00 00

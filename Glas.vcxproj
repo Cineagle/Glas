@@ -181,8 +181,8 @@
     <ClCompile Include="source\modules\tests\CustomStringOutputLogger\os\windows\Glas.Test.WindowsEventOutput.ixx" />
     <ClCompile Include="source\modules\tests\DirectLogger\os\windows\Glas.Test.DirectLogger.ixx" />
     <ClCompile Include="source\modules\tests\MaxiLogger\os\windows\Glas.Test.MaxiLogger.ixx" />
+    <ClCompile Include="source\modules\tests\MaxiLogger\os\windows\Main.cpp" />
     <ClCompile Include="source\modules\tests\MiniLogger\os\windows\Glas.Test.MiniLogger.ixx" />
-    <ClCompile Include="source\modules\tests\MiniLogger\os\windows\Main.cpp" />
     <ClCompile Include="source\modules\tests\SeparateFilesLogger\os\windows\Glas.Test.SeparateFilesLogger.ixx" />
     <ClCompile Include="source\modules\tests\SeveralLoggers\os\windows\Glas.Test.DebugLogger.ixx" />
     <ClCompile Include="source\modules\tests\SeveralLoggers\os\windows\Glas.Test.NotifyLogger.ixx" />

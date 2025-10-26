@@ -45,6 +45,11 @@ export namespace Glas
     private:
         virtual void expose() & override;
     private:
+        auto prepare(this auto& self, StringLike auto&& message, const std::source_location& location);
+        void deliver(this auto& self, std::unique_ptr<SuccessEntry<Mixins...>>&& entry);
+        auto format() &;
+        void output(std::vector<StringOutputFormat>&& formatted) const &;
+    private:
         static constexpr VTStyle style{
             .fgColor{
                 .red { 150 },
@@ -74,6 +79,23 @@ export namespace Glas
     void SuccessEntry<Mixins...>::success(this auto& self, StringLike auto&& message, 
         const std::source_location location)
     {
+        self.SuccessEntry<Mixins...>::deliver(
+            self.SuccessEntry<Mixins...>::prepare(
+                std::forward<decltype(message)>(message), location)
+        );
+    }
+
+    template <SuccessEntryMixins... Mixins>
+    void SuccessEntry<Mixins...>::success(this auto& self, Format format,
+        const std::source_location location)
+    {
+        self.SuccessEntry<Mixins...>::success(format.text, location);
+    }
+
+    template <SuccessEntryMixins... Mixins>
+    auto SuccessEntry<Mixins...>::prepare(this auto& self, StringLike auto&& message,
+        const std::source_location& location)
+    {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {
                 throw Exception{ "`message` is nullptr." };
@@ -95,6 +117,13 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
+        return entry;
+    }
+
+    template <SuccessEntryMixins... Mixins>
+    void SuccessEntry<Mixins...>::deliver(this auto& self, 
+        std::unique_ptr<SuccessEntry<Mixins...>>&& entry)
+    {
         if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
@@ -104,14 +133,12 @@ export namespace Glas
     }
 
     template <SuccessEntryMixins... Mixins>
-    void SuccessEntry<Mixins...>::success(this auto& self, Format format,
-        const std::source_location location)
-    {
-        self.success(format.text, location);
+    void SuccessEntry<Mixins...>::expose()& {
+        output(format());
     }
 
     template <SuccessEntryMixins... Mixins>
-    void SuccessEntry<Mixins...>::expose() & {
+    auto SuccessEntry<Mixins...>::format() & {
         std::vector<StringOutputFormat> formatted;
 
         const auto unpacker = [&]<typename T>() {
@@ -124,7 +151,7 @@ export namespace Glas
                     "`format` return type mismatch."
                 );
 
-                auto&& item = this->T::format(vtBegin);
+                auto item = this->T::format(vtBegin);
                 item.type.emplace(type);
                 item.style.emplace(style);
 
@@ -134,9 +161,12 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
-        const auto outputs = std::atomic_load_explicit(&this->OutputManager::sharedOutputs,
-            std::memory_order_relaxed);
+        return formatted;
+    }
 
+    template <SuccessEntryMixins... Mixins>
+    void SuccessEntry<Mixins...>::output(std::vector<StringOutputFormat>&& formatted) const & {
+        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
         if (outputs) {
             for (const auto& output : *outputs) {
                 output->output(formatted);

@@ -40,6 +40,11 @@ export namespace Glas
     private:
         virtual void expose() & override;
     private:
+        auto prepare(this auto& self, const std::size_t count, const std::source_location& location);
+        void deliver(this auto& self, std::unique_ptr<LinesEntry<Mixins...>>&& entry);
+        auto format() &;
+        void output(std::vector<StringOutputFormat>&& formatted) const &;
+    private:
         static constexpr VTStyle style{
             .fgColor{
                 .red { 200 },
@@ -69,9 +74,19 @@ export namespace Glas
     void LinesEntry<Mixins...>::lines(this auto& self, const std::size_t count,
         const std::source_location location)
     {
-        auto entry = std::make_unique<LinesEntry<Mixins...>>(self);
+        self.LinesEntry<Mixins...>::deliver(
+            self.LinesEntry<Mixins...>::prepare(
+                count, location)
+        );
+    }
 
+    template <LinesEntryMixins... Mixins>
+    auto LinesEntry<Mixins...>::prepare(this auto& self, const std::size_t count,
+        const std::source_location& location)
+    {
         const std::string message(count, '\n');
+
+        auto entry = std::make_unique<LinesEntry<Mixins...>>(self);
 
         const auto unpacker = [&]<typename T>() {
             if (entry->T::enabled.load(std::memory_order_relaxed)) {
@@ -86,6 +101,11 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
+        return entry;
+    }
+
+    template <LinesEntryMixins... Mixins>
+    void LinesEntry<Mixins...>::deliver(this auto& self, std::unique_ptr<LinesEntry<Mixins...>>&& entry) {
         if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
@@ -96,6 +116,11 @@ export namespace Glas
 
     template <LinesEntryMixins... Mixins>
     void LinesEntry<Mixins...>::expose() & {
+        output(format());
+    }
+
+    template <LinesEntryMixins... Mixins>
+    auto LinesEntry<Mixins...>::format() & {
         std::vector<StringOutputFormat> formatted;
 
         const auto unpacker = [&]<typename T>() {
@@ -108,7 +133,7 @@ export namespace Glas
                     "`format` return type mismatch."
                 );
 
-                auto&& item = this->T::format(vtBegin);
+                auto item = this->T::format(vtBegin);
                 item.type.emplace(type);
                 item.style.emplace(style);
 
@@ -118,9 +143,12 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
-        const auto outputs = std::atomic_load_explicit(&this->OutputManager::sharedOutputs,
-            std::memory_order_relaxed);
+        return formatted;
+    }
 
+    template <LinesEntryMixins... Mixins>
+    void LinesEntry<Mixins...>::output(std::vector<StringOutputFormat>&& formatted) const & {
+        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
         if (outputs) {
             for (const auto& output : *outputs) {
                 output->output(formatted);

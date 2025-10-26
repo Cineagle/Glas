@@ -51,6 +51,13 @@ export namespace Glas
     private:
         virtual void expose() & override;
     private:
+        auto prepare(this auto& self, const std::size_t count, StringLike auto&& message, 
+            const std::source_location& location);
+
+        void deliver(this auto& self, std::unique_ptr<SequenceEntry<Mixins...>>&& entry);
+        auto format() &;
+        void output(std::vector<StringOutputFormat>&& formatted) const &;
+    private:
         static constexpr VTStyle style{
             .fgColor{
                 .red { 200 },
@@ -80,15 +87,40 @@ export namespace Glas
     void SequenceEntry<Mixins...>::sequence(this auto& self, const std::size_t count,
         StringLike auto&& message, const std::source_location location)
     {
+        self.SequenceEntry<Mixins...>::deliver(
+            self.SequenceEntry<Mixins...>::prepare(
+                count, std::forward<decltype(message)>(message), location)
+        );
+    }
+
+    template <SequenceEntryMixins... Mixins>
+    void SequenceEntry<Mixins...>::sequence(this auto& self, const std::size_t count, 
+        Format format, const std::source_location location)
+    {
+        self.SequenceEntry<Mixins...>::sequence(count, format.text, location);
+    }
+
+    template <SequenceEntryMixins... Mixins>
+    void SequenceEntry<Mixins...>::sequence(this auto& self, const std::size_t count,
+        const char symbol, const std::source_location location)
+    {
+        self.SequenceEntry<Mixins...>::sequence(count, std::string{ symbol }, location);
+    }
+
+    template <SequenceEntryMixins... Mixins>
+    auto SequenceEntry<Mixins...>::prepare(this auto& self, const std::size_t count, 
+        StringLike auto&& message, const std::source_location& location)
+    {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {
                 throw Exception{ "`message` is nullptr." };
             }
         }
 
-        auto entry = std::make_unique<SequenceEntry<Mixins...>>(self);
+        const auto repeated = self.SequenceEntry<Mixins...>::buildSequence(
+            count, std::string_view{ message });
 
-        const auto repeated = buildSequence(count, std::string_view{ message });
+        auto entry = std::make_unique<SequenceEntry<Mixins...>>(self);
 
         const auto unpacker = [&]<typename T>() {
             if (entry->T::enabled.load(std::memory_order_relaxed)) {
@@ -103,26 +135,19 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
+        return entry;
+    }
+
+    template <SequenceEntryMixins... Mixins>
+    void SequenceEntry<Mixins...>::deliver(this auto& self, 
+        std::unique_ptr<SequenceEntry<Mixins...>>&& entry) 
+    {
         if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
         else {
             entry->expose();
         }
-    }
-
-    template <SequenceEntryMixins... Mixins>
-    void SequenceEntry<Mixins...>::sequence(this auto& self, const std::size_t count, 
-        Format format, const std::source_location location)
-    {
-        self.sequence(count, format.text, location);
-    }
-
-    template <SequenceEntryMixins... Mixins>
-    void SequenceEntry<Mixins...>::sequence(this auto& self, const std::size_t count,
-        const char symbol, const std::source_location location)
-    {
-        self.sequence(count, std::string{ symbol }, location);
     }
 
     template <SequenceEntryMixins... Mixins>
@@ -144,31 +169,39 @@ export namespace Glas
 
     template <SequenceEntryMixins... Mixins>
     void SequenceEntry<Mixins...>::expose() & {
-        std::vector<StringOutputFormat> formatted;
+        output(format());
+    }
 
-        const auto unpacker = [&]<typename T>() {
-            if (this->T::enabled.load(std::memory_order_relaxed)) {
+    template <SequenceEntryMixins... Mixins>
+    auto SequenceEntry<Mixins...>::format() & {
+         std::vector<StringOutputFormat> formatted;
 
-                static_assert(
-                    std::same_as<
-                    std::remove_cvref_t<decltype(this->T::format(std::declval<std::string_view>()))>,
-                    StringOutputFormat>,
-                    "`format` return type mismatch."
-                );
+         const auto unpacker = [&]<typename T>() {
+             if (this->T::enabled.load(std::memory_order_relaxed)) {
 
-                auto&& item = this->T::format(vtBegin);
-                item.type.emplace(type);
-                item.style.emplace(style);
+                 static_assert(
+                     std::same_as<
+                     std::remove_cvref_t<decltype(this->T::format(std::declval<std::string_view>()))>,
+                     StringOutputFormat>,
+                     "`format` return type mismatch."
+                 );
 
-                formatted.push_back(std::move(item));
-            }
-        };
+                 auto item = this->T::format(vtBegin);
+                 item.type.emplace(type);
+                 item.style.emplace(style);
 
-        ((unpacker.operator()<Mixins>()), ...);
+                 formatted.push_back(std::move(item));
+             }
+         };
 
-        const auto outputs = std::atomic_load_explicit(&this->OutputManager::sharedOutputs,
-            std::memory_order_relaxed);
+         ((unpacker.operator()<Mixins>()), ...);
 
+        return formatted;
+    }
+
+    template <SequenceEntryMixins... Mixins>
+    void SequenceEntry<Mixins...>::output(std::vector<StringOutputFormat>&& formatted) const & {
+        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
         if (outputs) {
             for (const auto& output : *outputs) {
                 output->output(formatted);

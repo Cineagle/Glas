@@ -64,6 +64,13 @@ export namespace Glas
     private:
         virtual void expose() & override;
     private:
+        auto prepare(this auto& self, StringLike auto&& message, const void* address, const std::size_t count,
+            const std::source_location& location);
+
+        void deliver(this auto& self, std::unique_ptr<BytesEntry<Mixins...>>&& entry);
+        auto format() &;
+        void output(std::vector<StringOutputFormat>&& formatted) const &;
+    private:
         static constexpr VTStyle style{
             .fgColor{
                 .red { 200 },
@@ -93,12 +100,35 @@ export namespace Glas
     void BytesEntry<Mixins...>::bytes(this auto& self, StringLike auto&& message,
         const void* address, const std::size_t count, const std::source_location location)
     {
+        self.BytesEntry<Mixins...>::deliver(
+            self.BytesEntry<Mixins...>::prepare(
+                std::forward<decltype(message)>(message), address, count, location)
+        );
+    }
+
+    template <BytesEntryMixins... Mixins>
+    void BytesEntry<Mixins...>::bytes(this auto& self, Format format, const void* address,
+        const std::size_t count, const std::source_location location)
+    {
+        self.BytesEntry<Mixins...>::bytes(format.text, address, count, location);
+    }
+
+    template <BytesEntryMixins... Mixins>
+    void BytesEntry<Mixins...>::bytes(this auto& self, const void* address,
+        const std::size_t count, const std::source_location location)
+    {
+        self.BytesEntry<Mixins...>::bytes("", address, count, location);
+    }
+
+    template <BytesEntryMixins... Mixins>
+    auto BytesEntry<Mixins...>::prepare(this auto& self, StringLike auto&& message, 
+        const void* address, const std::size_t count, const std::source_location& location)
+    {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {
                 throw Exception{ "`message` is nullptr." };
             }
         }
-
         if (!address) {
             throw Exception{ "`address` is nullptr." };
         }
@@ -106,10 +136,10 @@ export namespace Glas
             throw Exception{ "`count` is 0." };
         }
 
-        auto entry = std::make_unique<BytesEntry<Mixins...>>(self);
-
         std::string formed{ std::forward<decltype(message)>(message) };
-        formed.append(formBytes(address, count));
+        formed.append(self.BytesEntry<Mixins...>::formBytes(address, count));
+        
+        auto entry = std::make_unique<BytesEntry<Mixins...>>(self);
 
         const auto unpacker = [&]<typename T>() {
             if (entry->T::enabled.load(std::memory_order_relaxed)) {
@@ -124,26 +154,17 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
+        return entry;
+    }
+
+    template <BytesEntryMixins... Mixins>
+    void BytesEntry<Mixins...>::deliver(this auto& self, std::unique_ptr<BytesEntry<Mixins...>>&& entry) {
         if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
         else {
             entry->expose();
         }
-    }
-
-    template <BytesEntryMixins... Mixins>
-    void BytesEntry<Mixins...>::bytes(this auto& self, Format format, const void* address,
-        const std::size_t count, const std::source_location location)
-    {
-        self.bytes(format.text, address, count, location);
-    }
-
-    template <BytesEntryMixins... Mixins>
-    void BytesEntry<Mixins...>::bytes(this auto& self, const void* address,
-        const std::size_t count, const std::source_location location)
-    {
-        self.bytes("", address, count, location);
     }
 
     template <BytesEntryMixins... Mixins>
@@ -245,6 +266,11 @@ export namespace Glas
 
     template <BytesEntryMixins... Mixins>
     void BytesEntry<Mixins...>::expose() & {
+        output(format());
+    }
+
+    template <BytesEntryMixins... Mixins>
+    auto BytesEntry<Mixins...>::format() & {
         std::vector<StringOutputFormat> formatted;
 
         const auto unpacker = [&]<typename T>() {
@@ -257,7 +283,7 @@ export namespace Glas
                     "`format` return type mismatch."
                 );
 
-                auto&& item = this->T::format(vtBegin);
+                auto item = this->T::format(vtBegin);
                 item.type.emplace(type);
                 item.style.emplace(style);
 
@@ -267,9 +293,12 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
-        const auto outputs = std::atomic_load_explicit(&this->OutputManager::sharedOutputs,
-            std::memory_order_relaxed);
+        return formatted;
+    }
 
+    template <BytesEntryMixins... Mixins>
+    void BytesEntry<Mixins...>::output(std::vector<StringOutputFormat>&& formatted) const & {
+        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
         if (outputs) {
             for (const auto& output : *outputs) {
                 output->output(formatted);

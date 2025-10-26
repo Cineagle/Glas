@@ -45,6 +45,11 @@ export namespace Glas
     private:
         virtual void expose() & override;
     private:
+        auto prepare(this auto& self, StringLike auto&& message, const std::source_location& location);
+        void deliver(this auto& self, std::unique_ptr<WarningEntry<Mixins...>>&& entry);
+        auto format() &;
+        void output(std::vector<StringOutputFormat>&& formatted) const &;
+    private:
         static constexpr VTStyle style{
             .fgColor{
                 .red { 250 },
@@ -74,6 +79,23 @@ export namespace Glas
     void WarningEntry<Mixins...>::warning(this auto& self, StringLike auto&& message, 
         const std::source_location location)
     {
+        self.WarningEntry<Mixins...>::deliver(
+            self.WarningEntry<Mixins...>::prepare(
+                std::forward<decltype(message)>(message), location)
+        );
+    }
+
+    template <WarningEntryMixins... Mixins>
+    void WarningEntry<Mixins...>::warning(this auto& self, Format format,
+        const std::source_location location)
+    {
+        self.WarningEntry<Mixins...>::warning(format.text, location);
+    }
+
+    template <WarningEntryMixins... Mixins>
+    auto WarningEntry<Mixins...>::prepare(this auto& self, StringLike auto&& message,
+        const std::source_location& location)
+    {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {
                 throw Exception{ "`message` is nullptr." };
@@ -95,6 +117,13 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
+        return entry;
+    }
+
+    template <WarningEntryMixins... Mixins>
+    void WarningEntry<Mixins...>::deliver(this auto& self, 
+        std::unique_ptr<WarningEntry<Mixins...>>&& entry)
+    {
         if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
@@ -104,14 +133,12 @@ export namespace Glas
     }
 
     template <WarningEntryMixins... Mixins>
-    void WarningEntry<Mixins...>::warning(this auto& self, Format format,
-        const std::source_location location)
-    {
-        self.warning(format.text, location);
+    void WarningEntry<Mixins...>::expose() & {
+        output(format());
     }
 
     template <WarningEntryMixins... Mixins>
-    void WarningEntry<Mixins...>::expose() & {
+    auto WarningEntry<Mixins...>::format() & {
         std::vector<StringOutputFormat> formatted;
 
         const auto unpacker = [&]<typename T>() {
@@ -124,7 +151,7 @@ export namespace Glas
                     "`format` return type mismatch."
                 );
 
-                auto&& item = this->T::format(vtBegin);
+                auto item = this->T::format(vtBegin);
                 item.type.emplace(type);
                 item.style.emplace(style);
 
@@ -134,9 +161,12 @@ export namespace Glas
 
         ((unpacker.operator()<Mixins>()), ...);
 
-        const auto outputs = std::atomic_load_explicit(&this->OutputManager::sharedOutputs,
-            std::memory_order_relaxed);
+        return formatted;
+    }
 
+    template <WarningEntryMixins... Mixins>
+    void WarningEntry<Mixins...>::output(std::vector<StringOutputFormat>&& formatted) const & {
+        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
         if (outputs) {
             for (const auto& output : *outputs) {
                 output->output(formatted);

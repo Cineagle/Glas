@@ -1,0 +1,12 @@
+26.10.2025 12:08:52  info text 1
+26.10.2025 12:08:52  info text 2
+26.10.2025 12:08:52  warning text 1
+26.10.2025 12:08:52  warning text 2
+26.10.2025 12:08:52  error text 1
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`
+26.10.2025 12:08:52  error text 2
+*Last Error Code:*
+- Value: 183
+- Description: `Cannot create a file when that file already exists.`

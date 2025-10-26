@@ -26,6 +26,11 @@ export namespace Glas::Test
     private:
         virtual void expose() & override;
     private:
+        template <typename T>
+        auto prepare(this auto& self, const void* address);
+        void deliver(this auto& self, std::unique_ptr<ValueEntry>&& entry);
+        void output() const &;
+    private:
         std::vector<std::byte> bytes;
     };
 }
@@ -34,6 +39,13 @@ export namespace Glas::Test
 {
     template <typename T>
     void ValueEntry::value(this auto& self, const void* address) {
+        self.ValueEntry::deliver(
+            self.ValueEntry::prepare<T>(address)
+        );
+    }
+
+    template <typename T>
+    auto ValueEntry::prepare(this auto& self, const void* address) {
         if (!address) {
             throw Exception{ "`address` is nullptr." };
         }
@@ -42,6 +54,10 @@ export namespace Glas::Test
         entry->bytes.resize(sizeof(T));
         std::memcpy(entry->bytes.data(), address, sizeof(T));
 
+        return entry;
+    }
+
+    void ValueEntry::deliver(this auto& self, std::unique_ptr<ValueEntry>&& entry) {
         if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
@@ -51,9 +67,11 @@ export namespace Glas::Test
     }
 
     void ValueEntry::expose() & {
-        const auto outputs = std::atomic_load_explicit(&this->OutputManager::sharedOutputs,
-            std::memory_order_relaxed);
+        output();
+    }
 
+    void ValueEntry::output() const & {
+        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
         if (outputs) {
             for (const auto& output : *outputs) {
                 output->output(bytes);

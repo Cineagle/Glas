@@ -45,6 +45,11 @@ export namespace Glas::Test
     private:
         virtual void expose() & override;
     private:
+        auto prepare(this auto& self, StringLike auto&& message, const std::source_location& location);
+        void deliver(this auto& self, std::unique_ptr<CriticalEntry<Mixins...>>&& entry);
+        auto format() &;
+        void output(std::vector<StringOutputFormat>&& formatted) const &;
+    private:
         static constexpr VTStyle style{
             .fgColor{
                 .red { 20 },
@@ -74,6 +79,23 @@ export namespace Glas::Test
     void CriticalEntry<Mixins...>::critical(this auto& self, StringLike auto&& message, 
         const std::source_location location)
     {
+        self.CriticalEntry<Mixins...>::deliver(
+            self.CriticalEntry<Mixins...>::prepare(
+                std::forward<decltype(message)>(message), location)
+        );
+    }
+
+    template <CriticalEntryMixins... Mixins>
+    void CriticalEntry<Mixins...>::critical(this auto& self, Format format,
+        const std::source_location location)
+    {
+        self.CriticalEntry<Mixins...>::critical(format.text, location);
+    }
+
+    template <CriticalEntryMixins... Mixins>
+    auto CriticalEntry<Mixins...>::prepare(this auto& self, StringLike auto&& message,
+        const std::source_location& location)
+    {
         if constexpr (std::is_pointer_v<std::remove_cvref_t<decltype(message)>>) {
             if (!message) {
                 throw Exception{ "`message` is nullptr." };
@@ -95,6 +117,13 @@ export namespace Glas::Test
 
         ((unpacker.operator()<Mixins>()), ...);
 
+        return entry;
+    }
+
+    template <CriticalEntryMixins... Mixins>
+    void CriticalEntry<Mixins...>::deliver(this auto& self, 
+        std::unique_ptr<CriticalEntry<Mixins...>>&& entry) 
+    {
         if (entry->Entry::outputScheme.load(std::memory_order_relaxed) == Scheme::Queue) {
             self.enqueue(std::move(entry));
         }
@@ -104,14 +133,12 @@ export namespace Glas::Test
     }
 
     template <CriticalEntryMixins... Mixins>
-    void CriticalEntry<Mixins...>::critical(this auto& self, Format format,
-        const std::source_location location)
-    {
-        self.critical(format.text, location);
+    void CriticalEntry<Mixins...>::expose() & {
+        output(format());
     }
 
     template <CriticalEntryMixins... Mixins>
-    void CriticalEntry<Mixins...>::expose() & {
+    auto CriticalEntry<Mixins...>::format() & {
         std::vector<StringOutputFormat> formatted;
 
         const auto unpacker = [&]<typename T>() {
@@ -124,7 +151,7 @@ export namespace Glas::Test
                     "`format` return type mismatch."
                     );
 
-                auto&& item = this->T::format(vtBegin);
+                auto item = this->T::format(vtBegin);
                 item.type.emplace(type);
                 item.style.emplace(style);
 
@@ -134,9 +161,12 @@ export namespace Glas::Test
 
         ((unpacker.operator()<Mixins>()), ...);
 
-        const auto outputs = std::atomic_load_explicit(&this->OutputManager::sharedOutputs,
-            std::memory_order_relaxed);
+        return formatted;
+    }
 
+    template <CriticalEntryMixins... Mixins>
+    void CriticalEntry<Mixins...>::output(std::vector<StringOutputFormat>&& formatted) const & {
+        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
         if (outputs) {
             for (const auto& output : *outputs) {
                 output->output(formatted);

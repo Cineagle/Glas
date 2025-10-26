@@ -338,8 +338,8 @@
     <ClCompile Include="source\modules\tests\CommandLineLogger\os\windows\CommandLineLogger.ixx">
       <Filter>source\modules\tests\CommandLineLogger\os\windows</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\MiniLogger\os\windows\Main.cpp">
-      <Filter>source\modules\tests\MiniLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\MaxiLogger\os\windows\Main.cpp">
+      <Filter>source\modules\tests\MaxiLogger\os\windows</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
