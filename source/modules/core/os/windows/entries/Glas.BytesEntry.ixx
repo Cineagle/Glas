@@ -64,12 +64,11 @@ export namespace Glas
     private:
         virtual void expose() & override;
     private:
-        auto prepare(this auto& self, StringLike auto&& message, const void* address, const std::size_t count,
-            const std::source_location& location);
+        auto prepare(this auto& self, StringLike auto&& message, const void* address, 
+            const std::size_t count, const std::source_location& location);
 
         void deliver(this auto& self, std::unique_ptr<BytesEntry<Mixins...>>&& entry);
         auto format() &;
-        void output(std::vector<StringOutputFormat>&& formatted) const &;
     private:
         static constexpr VTStyle style{
             .fgColor{
@@ -266,7 +265,7 @@ export namespace Glas
 
     template <BytesEntryMixins... Mixins>
     void BytesEntry<Mixins...>::expose() & {
-        output(format());
+        this->OutputManager::output(format());
     }
 
     template <BytesEntryMixins... Mixins>
@@ -294,15 +293,5 @@ export namespace Glas
         ((unpacker.operator()<Mixins>()), ...);
 
         return formatted;
-    }
-
-    template <BytesEntryMixins... Mixins>
-    void BytesEntry<Mixins...>::output(std::vector<StringOutputFormat>&& formatted) const & {
-        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
-        if (outputs) {
-            for (const auto& output : *outputs) {
-                output->output(formatted);
-            }
-        }
     }
 }

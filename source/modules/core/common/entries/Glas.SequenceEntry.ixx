@@ -56,7 +56,6 @@ export namespace Glas
 
         void deliver(this auto& self, std::unique_ptr<SequenceEntry<Mixins...>>&& entry);
         auto format() &;
-        void output(std::vector<StringOutputFormat>&& formatted) const &;
     private:
         static constexpr VTStyle style{
             .fgColor{
@@ -169,7 +168,7 @@ export namespace Glas
 
     template <SequenceEntryMixins... Mixins>
     void SequenceEntry<Mixins...>::expose() & {
-        output(format());
+        this->OutputManager::output(format());
     }
 
     template <SequenceEntryMixins... Mixins>
@@ -197,15 +196,5 @@ export namespace Glas
          ((unpacker.operator()<Mixins>()), ...);
 
         return formatted;
-    }
-
-    template <SequenceEntryMixins... Mixins>
-    void SequenceEntry<Mixins...>::output(std::vector<StringOutputFormat>&& formatted) const & {
-        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
-        if (outputs) {
-            for (const auto& output : *outputs) {
-                output->output(formatted);
-            }
-        }
     }
 }

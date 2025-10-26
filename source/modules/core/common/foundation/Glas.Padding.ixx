@@ -54,18 +54,15 @@ export namespace Glas
 export namespace Glas
 {
     PaddingProperty::PaddingProperty(const PaddingProperty& other) {
-        const auto snapshot = std::atomic_load_explicit(&other.paddingStrings,
-            std::memory_order_relaxed);
-
+        const auto snapshot = other.paddingStrings.load(std::memory_order_relaxed);
         if (snapshot) {
-            std::atomic_store_explicit(&paddingStrings, 
-                std::make_shared<PaddingStrings>(*snapshot),
+            paddingStrings.store(std::make_shared<PaddingStrings>(*snapshot),
                 std::memory_order_relaxed);
         }
     }
 
     void PaddingProperty::padding(const Padding padding) & {
         const auto ptr = std::make_shared<PaddingStrings>(padding);
-        std::atomic_store_explicit(&paddingStrings, ptr, std::memory_order_relaxed);
+        paddingStrings.store(ptr, std::memory_order_relaxed);
     }
 }

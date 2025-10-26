@@ -17,18 +17,18 @@ export namespace Glas
         BasicCharBufferWriter(CharT const* target, const std::size_t capacity) noexcept;
     public:
         template <StringLikeT<CharT>  T>
-        [[nodiscard]] Result assign(const T& source) noexcept;
+        [[nodiscard]] Result assign(const T& source) & noexcept;
 
         template <StringLikeT<CharT>  T>
-        [[nodiscard]] Result operator=(const T& source) noexcept;
+        [[nodiscard]] Result operator=(const T& source) & noexcept;
 
-        std::wstring_view view() const noexcept;
-        operator std::wstring_view() const noexcept;
+        std::wstring_view view() const & noexcept;
+        operator std::wstring_view() const & noexcept;
 
-        std::size_t capacity() const noexcept;
+        std::size_t capacity() const & noexcept;
 
-        void clear() noexcept;
-        void operator=(std::nullptr_t) noexcept;
+        void clear() & noexcept;
+        void operator=(std::nullptr_t) & noexcept;
     private:
         std::span<CharT> buffer;
     };
@@ -47,13 +47,17 @@ export namespace Glas
     {}
 
     template <typename CharT>
-    BasicCharBufferWriter<CharT>:: BasicCharBufferWriter(CharT const* target, const std::size_t capacity) noexcept :
+    BasicCharBufferWriter<CharT>:: BasicCharBufferWriter(CharT const* target, 
+        const std::size_t capacity) noexcept :
+
         buffer{ target, capacity }
     {}
 
     template <typename CharT>
     template <StringLikeT<CharT>  T>
-    [[nodiscard]] BasicCharBufferWriter<CharT>::Result BasicCharBufferWriter<CharT>::assign(const T& source) noexcept {
+    [[nodiscard]] BasicCharBufferWriter<CharT>::Result BasicCharBufferWriter<CharT>::assign(
+        const T& source) & noexcept 
+    {
         if (buffer.empty()) {
             return Result::Empty;
         }
@@ -80,34 +84,36 @@ export namespace Glas
 
     template <typename CharT>
     template <StringLikeT<CharT>  T>
-    [[nodiscard]] BasicCharBufferWriter<CharT>::Result BasicCharBufferWriter<CharT>::operator=(const T& source) noexcept {
+    [[nodiscard]] BasicCharBufferWriter<CharT>::Result BasicCharBufferWriter<CharT>::operator=(
+        const T& source) & noexcept 
+    {
         return assign(source);
     }
 
     template <typename CharT>
-    std::wstring_view BasicCharBufferWriter<CharT>::view() const noexcept {
+    std::wstring_view BasicCharBufferWriter<CharT>::view() const & noexcept {
         return buffer.empty() ? std::wstring_view{} : std::wstring_view{ buffer.data() };
     }
 
     template <typename CharT>
-    BasicCharBufferWriter<CharT>::operator std::wstring_view() const noexcept {
+    BasicCharBufferWriter<CharT>::operator std::wstring_view() const & noexcept {
         return view();
     }
 
     template <typename CharT>
-    std::size_t BasicCharBufferWriter<CharT>::capacity() const noexcept {
+    std::size_t BasicCharBufferWriter<CharT>::capacity() const & noexcept {
         return buffer.size();
     }
 
     template <typename CharT>
-    void BasicCharBufferWriter<CharT>::clear() noexcept {
+    void BasicCharBufferWriter<CharT>::clear() & noexcept {
         if (!buffer.empty()) {
             buffer[0] = CharT{};
         }
     }
 
     template <typename CharT>
-    void BasicCharBufferWriter<CharT>::operator=(std::nullptr_t) noexcept {
+    void BasicCharBufferWriter<CharT>::operator=(std::nullptr_t) & noexcept {
         clear();
     }
 }

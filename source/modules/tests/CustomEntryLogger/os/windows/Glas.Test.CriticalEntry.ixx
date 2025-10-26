@@ -48,7 +48,6 @@ export namespace Glas::Test
         auto prepare(this auto& self, StringLike auto&& message, const std::source_location& location);
         void deliver(this auto& self, std::unique_ptr<CriticalEntry<Mixins...>>&& entry);
         auto format() &;
-        void output(std::vector<StringOutputFormat>&& formatted) const &;
     private:
         static constexpr VTStyle style{
             .fgColor{
@@ -134,7 +133,7 @@ export namespace Glas::Test
 
     template <CriticalEntryMixins... Mixins>
     void CriticalEntry<Mixins...>::expose() & {
-        output(format());
+        this->OutputManager::output(format());
     }
 
     template <CriticalEntryMixins... Mixins>
@@ -162,15 +161,5 @@ export namespace Glas::Test
         ((unpacker.operator()<Mixins>()), ...);
 
         return formatted;
-    }
-
-    template <CriticalEntryMixins... Mixins>
-    void CriticalEntry<Mixins...>::output(std::vector<StringOutputFormat>&& formatted) const & {
-        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
-        if (outputs) {
-            for (const auto& output : *outputs) {
-                output->output(formatted);
-            }
-        }
     }
 }

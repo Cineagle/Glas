@@ -1,6 +1,7 @@
 export module Glas.OutputManager;
 export import Glas.Output;
 export import Glas.StringOutputFormat;
+export import Glas.Concepts;
 export import std;
 
 
@@ -26,6 +27,8 @@ export namespace Glas
         bool outputs(SharedOutputsVector&& outputs) &;
         void clear() &;
     protected:
+        void output(ForwardedAs<T> auto&& formatted) const &;
+    protected:
         std::atomic<std::shared_ptr<SharedOutputsVector>> sharedOutputs;
     };
 }
@@ -34,12 +37,9 @@ export namespace Glas
 {
     template <typename T>
     OutputManager<T>::OutputManager(const OutputManager& other) {
-        const auto snapshot = std::atomic_load_explicit(&other.sharedOutputs,
-            std::memory_order_relaxed);
-
+        const auto snapshot = other.sharedOutputs.load(std::memory_order_relaxed);
         if (snapshot) {
-            std::atomic_store_explicit(&sharedOutputs, 
-                std::make_shared<SharedOutputsVector>(*snapshot),
+            sharedOutputs.store(std::make_shared<SharedOutputsVector>(*snapshot),
                 std::memory_order_relaxed);
         }
     }
@@ -51,7 +51,7 @@ export namespace Glas
             (unpacked.push_back(std::forward<decltype(outputs)>(outputs)), ...);
 
             const auto ptr = std::make_shared<SharedOutputsVector>(std::move(unpacked));
-            std::atomic_store_explicit(&sharedOutputs, ptr, std::memory_order_relaxed);
+            sharedOutputs.store(ptr, std::memory_order_relaxed);
             return true;
         }
         return false;
@@ -63,7 +63,7 @@ export namespace Glas
             return false;
         }
         const auto ptr = std::make_shared<SharedOutputsVector>(outputs);
-        std::atomic_store_explicit(&sharedOutputs, ptr, std::memory_order_relaxed);
+        sharedOutputs.store(ptr, std::memory_order_relaxed);
         return true;
     }
 
@@ -73,12 +73,22 @@ export namespace Glas
             return false;
         }
         const auto ptr = std::make_shared<SharedOutputsVector>(std::move(outputs));
-        std::atomic_store_explicit(&sharedOutputs, ptr, std::memory_order_relaxed);
+        sharedOutputs.store(ptr, std::memory_order_relaxed);
         return true;
     }
 
     template <typename T>
     void OutputManager<T>::clear() & {
-        std::atomic_store_explicit(&sharedOutputs, nullptr, std::memory_order_relaxed);
+        sharedOutputs.store(nullptr, std::memory_order_relaxed);
+    }
+
+    template <typename T>
+    void OutputManager<T>::output(ForwardedAs<T> auto&& formatted) const & {
+        const auto outputs = sharedOutputs.load(std::memory_order_relaxed);
+        if (outputs) {
+            for (const auto& output : *outputs) {
+                output->output(formatted);
+            }
+        }
     }
 }

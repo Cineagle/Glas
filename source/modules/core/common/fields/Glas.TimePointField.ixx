@@ -70,9 +70,7 @@ export namespace Glas
     StringOutputFormat TimePointField::format(const std::string_view entryVTBegin) const & {
 		std::string text;
 
-        const auto paddingSnapshot = std::atomic_load_explicit(&paddingStrings, 
-            std::memory_order_acquire);
-
+        const auto paddingSnapshot = paddingStrings.load(std::memory_order_relaxed);
 		if (paddingSnapshot) {
 			text.append(paddingSnapshot->breakBefore);
 			text.append(paddingSnapshot->spaceBefore);

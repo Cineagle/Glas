@@ -97,7 +97,9 @@ export namespace Glas
 		created = false;
 	}
 
-	std::shared_ptr<ConsoleStringOutput> ConsoleStringOutput::create(ForwardedAs<ConsoleDesc> auto&& desc) {
+	std::shared_ptr<ConsoleStringOutput> ConsoleStringOutput::create(
+		ForwardedAs<ConsoleDesc> auto&& desc) 
+	{
 		const std::lock_guard lock{ createdMutex };
 
 		if (created) {

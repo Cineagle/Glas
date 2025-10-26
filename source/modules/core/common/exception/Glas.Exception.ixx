@@ -13,9 +13,9 @@ export namespace Glas
     public:
         const char* what() const noexcept override;
     private:
-        std::string formError() const;
-        std::string formLocation(const std::source_location location) const;
-        std::string formTrace() const;
+        std::string formError() const &;
+        std::string formLocation(const std::source_location location) const &;
+        std::string formTrace() const &;
     private:
         std::string description;
     };

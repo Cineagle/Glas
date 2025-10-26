@@ -29,7 +29,6 @@ export namespace Glas::Test
         template <typename T>
         auto prepare(this auto& self, const void* address);
         void deliver(this auto& self, std::unique_ptr<ValueEntry>&& entry);
-        void output() const &;
     private:
         std::vector<std::byte> bytes;
     };
@@ -67,15 +66,6 @@ export namespace Glas::Test
     }
 
     void ValueEntry::expose() & {
-        output();
-    }
-
-    void ValueEntry::output() const & {
-        const auto outputs = this->OutputManager::sharedOutputs.load(std::memory_order_relaxed);
-        if (outputs) {
-            for (const auto& output : *outputs) {
-                output->output(bytes);
-            }
-        }
+        this->OutputManager::output(bytes);
     }
 }

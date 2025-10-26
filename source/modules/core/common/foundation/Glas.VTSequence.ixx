@@ -32,11 +32,9 @@ export namespace Glas
     VTSequence::VTSequence(const VTSequence& other) {
         enabled.store(other.enabled.load(std::memory_order_relaxed), std::memory_order_relaxed);
 
-        const auto snapshot = std::atomic_load_explicit(&other.vtBegin,
-            std::memory_order_relaxed);
-
+        const auto snapshot = other.vtBegin.load(std::memory_order_relaxed);
         if (snapshot) {
-            std::atomic_store_explicit(&vtBegin, std::make_shared<std::string>(*snapshot),
+            vtBegin.store(std::make_shared<std::string>(*snapshot),
                 std::memory_order_relaxed);
         }
     }
@@ -44,11 +42,9 @@ export namespace Glas
     VTSequence::VTSequence(VTSequence&& other) noexcept {
         enabled.store(other.enabled.load(std::memory_order_relaxed), std::memory_order_relaxed);
 
-        const auto snapshot = std::atomic_load_explicit(&other.vtBegin,
-            std::memory_order_relaxed);
-
+        const auto snapshot = other.vtBegin.load(std::memory_order_relaxed);
         if (snapshot) {
-            std::atomic_store_explicit(&vtBegin, std::make_shared<std::string>(std::move(*snapshot)),
+            vtBegin.store(std::make_shared<std::string>(std::move(*snapshot)),
                 std::memory_order_relaxed);
         }
     }
@@ -62,7 +58,7 @@ export namespace Glas
     }
 
     void VTSequence::style(const VTStyle style) & {
-        std::atomic_store_explicit(&vtBegin, std::make_shared<std::string>(formVTBegin(style)),
+        vtBegin.store(std::make_shared<std::string>(formVTBegin(style)),
             std::memory_order_relaxed);
     }
 

@@ -19,7 +19,7 @@ namespace Glas
         description = std::move(text);
     }
 
-    std::string Exception::formError() const {
+    std::string Exception::formError() const & {
         const std::error_code code{ static_cast<int>(GetLastError()), std::system_category() };
 
         std::string text;
@@ -36,7 +36,7 @@ namespace Glas
         return text;
     }
 
-    std::string Exception::formLocation(const std::source_location location) const {
+    std::string Exception::formLocation(const std::source_location location) const & {
 #ifdef NDEBUG 
         const std::string file{ std::filesystem::path(location.file_name()).filename().string() };
 #else
@@ -63,7 +63,7 @@ namespace Glas
         return text;
     }
 
-    std::string Exception::formTrace() const {
+    std::string Exception::formTrace() const & {
         std::string text;
         text.append("\n\n*StackTrace:*");
 
