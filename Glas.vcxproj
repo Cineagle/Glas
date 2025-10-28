@@ -40,13 +40,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v145</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -105,6 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -119,7 +120,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -167,26 +169,6 @@
     <ClCompile Include="source\modules\prepares\Glas.LoggerNamePrepare.ixx" />
     <ClCompile Include="source\modules\prepares\Glas.MessagePrepare.ixx" />
     <ClCompile Include="source\modules\prepares\Glas.TypePrepare.ixx" />
-    <ClCompile Include="source\modules\tests\BinaryOutputLogger\Glas.Test.BinaryOutputFile.ixx" />
-    <ClCompile Include="source\modules\tests\BinaryOutputLogger\Glas.Test.BinaryOutputLogger.ixx" />
-    <ClCompile Include="source\modules\tests\BinaryOutputLogger\Glas.Test.ValueEntry.ixx" />
-    <ClCompile Include="source\modules\tests\ColoredLogger\Glas.Test.ColoredLogger.ixx" />
-    <ClCompile Include="source\modules\tests\CommandLineLogger\CommandLineLogger.ixx" />
-    <ClCompile Include="source\modules\tests\CustomEntryLogger\Glas.Test.CriticalEntry.ixx" />
-    <ClCompile Include="source\modules\tests\CustomEntryLogger\Glas.Test.CustomEntryLogger.ixx" />
-    <ClCompile Include="source\modules\tests\CustomFieldLogger\Glas.Test.CustomFieldLogger.ixx" />
-    <ClCompile Include="source\modules\tests\CustomFieldLogger\Glas.Test.UserNameField.ixx" />
-    <ClCompile Include="source\modules\tests\CustomStringOutputLogger\Glas.Test.CustomStringOutputLogger.ixx" />
-    <ClCompile Include="source\modules\tests\CustomStringOutputLogger\Glas.Test.WindowsEventOutput.ixx" />
-    <ClCompile Include="source\modules\tests\DirectLogger\Glas.Test.DirectLogger.ixx" />
-    <ClCompile Include="source\modules\tests\MaxiLogger\Glas.Test.MaxiLogger.ixx" />
-    <ClCompile Include="source\modules\tests\MiniLogger\Glas.Test.MiniLogger.ixx" />
-    <ClCompile Include="source\modules\tests\MiniLogger\Main.cpp" />
-    <ClCompile Include="source\modules\tests\SeparateFilesLogger\Glas.Test.SeparateFilesLogger.ixx" />
-    <ClCompile Include="source\modules\tests\SeveralLoggers\Glas.Test.DebugLogger.ixx" />
-    <ClCompile Include="source\modules\tests\SeveralLoggers\Glas.Test.NotifyLogger.ixx" />
-    <ClCompile Include="source\modules\tests\SeveralLoggers\Glas.Test.OtherLogger.ixx" />
-    <ClCompile Include="source\modules\tests\UnboundQueueLoggger\Glas.Test.UnboundQueueLogger.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
