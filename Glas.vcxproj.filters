@@ -10,155 +10,62 @@
     <Filter Include="source\readme">
       <UniqueIdentifier>{817d1502-ba8b-43c1-a17a-bb6f19b82209}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\modules\core">
-      <UniqueIdentifier>{ffa694c7-f537-4197-9793-d76e347dbe65}</UniqueIdentifier>
+    <Filter Include="source\modules\common">
+      <UniqueIdentifier>{0478c405-40e2-4edd-811b-5985ddd5889a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\modules\core\common">
-      <UniqueIdentifier>{c35155f6-875a-44fd-ac04-83ada3351f87}</UniqueIdentifier>
+    <Filter Include="source\modules\entries">
+      <UniqueIdentifier>{830e9fe3-ecc9-4d24-96fb-f53171a7c579}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\modules\core\os">
-      <UniqueIdentifier>{536d1e4c-8374-407d-ab18-d9b926cbd042}</UniqueIdentifier>
+    <Filter Include="source\modules\fields">
+      <UniqueIdentifier>{2a83c1d7-20de-466f-8775-43400cebd78d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\modules\core\common\exception">
-      <UniqueIdentifier>{d54b42bb-d109-4a61-8c0d-66ab3c0fc879}</UniqueIdentifier>
+    <Filter Include="source\modules\misc">
+      <UniqueIdentifier>{03ada01a-db58-453d-83ac-520438af1f25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\modules\core\common\entries">
-      <UniqueIdentifier>{5f09de71-7712-41a4-92d9-75ca3706c289}</UniqueIdentifier>
+    <Filter Include="source\modules\outputs">
+      <UniqueIdentifier>{e6bbd984-d1b0-4042-bd23-cf284f9c4577}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\modules\core\common\fields">
-      <UniqueIdentifier>{8f6c89ef-ca48-4602-9ca6-38ce4ebdae16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\core\common\foundation">
-      <UniqueIdentifier>{e4ef6995-80ab-4af7-82fc-03a89fc09c0a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\core\common\prepares">
-      <UniqueIdentifier>{adad4248-36db-450f-8dab-bca834b8dfca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\core\os\windows">
-      <UniqueIdentifier>{87c64f2b-8586-45f8-b717-e5a0df53ef95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\core\os\windows\entries">
-      <UniqueIdentifier>{c9085e50-92b1-4100-9be7-af5f4a7112f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\core\os\windows\exception">
-      <UniqueIdentifier>{436edbc4-2b40-4e36-adea-def19e6e1e5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\core\os\windows\fields">
-      <UniqueIdentifier>{725c02f8-6ee7-4808-a50a-0c226e3c4215}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\core\os\windows\outputs">
-      <UniqueIdentifier>{b12c33b6-9685-42e9-8c40-68532a1a56b9}</UniqueIdentifier>
+    <Filter Include="source\modules\prepares">
+      <UniqueIdentifier>{a6c55245-c5d0-41bd-950f-fc9e0e82fc6c}</UniqueIdentifier>
     </Filter>
     <Filter Include="source\modules\tests">
-      <UniqueIdentifier>{8ddb875b-1c34-4748-a86b-7727b4343254}</UniqueIdentifier>
+      <UniqueIdentifier>{4032ebdb-1624-4380-8439-d36f8e0a24a6}</UniqueIdentifier>
     </Filter>
     <Filter Include="source\modules\tests\BinaryOutputLogger">
-      <UniqueIdentifier>{b8a81e80-b2fa-40ed-bb82-63f63065e0cb}</UniqueIdentifier>
+      <UniqueIdentifier>{42017c9d-23d9-4761-8347-46f0428a37ad}</UniqueIdentifier>
     </Filter>
     <Filter Include="source\modules\tests\ColoredLogger">
-      <UniqueIdentifier>{8bc310ea-7d90-40ab-bebd-591e59c9b92a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\CustomEntryLogger">
-      <UniqueIdentifier>{855651ce-2203-4d21-b415-e9f62ac98494}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\CustomFieldLogger">
-      <UniqueIdentifier>{93e94e73-1092-4e43-a461-60d098346e94}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\CustomStringOutputLogger">
-      <UniqueIdentifier>{91b408c8-6420-492d-b727-06fc34ba8f00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\DirectLogger">
-      <UniqueIdentifier>{7f9ea591-0726-4df2-be6a-e39c5cfdecac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\MaxiLogger">
-      <UniqueIdentifier>{350570f2-bba7-457b-9597-82f62f5e58af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\MiniLogger">
-      <UniqueIdentifier>{662c8a71-e51a-4526-a6bc-3b90471582d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\SeparateFilesLogger">
-      <UniqueIdentifier>{22b60a5a-b598-45c0-a8ce-a4c2724d57cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\SeveralLoggers">
-      <UniqueIdentifier>{00c3d28e-eb72-416b-9014-db4ac444dc0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\UnboundQueueLoggger">
-      <UniqueIdentifier>{952cb5d6-9e48-4041-8c74-9578f1f4d282}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\BinaryOutputLogger\os">
-      <UniqueIdentifier>{3d169798-7bff-4e3b-a6e6-e7e11e9c264e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\ColoredLogger\os">
-      <UniqueIdentifier>{f6e86bd5-ef07-46b5-9a06-ccb43bae0014}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\CustomEntryLogger\os">
-      <UniqueIdentifier>{cf0298fc-d36f-4e53-aa97-eb0dd08ff0a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\CustomFieldLogger\os">
-      <UniqueIdentifier>{5977f986-dc34-465b-8d99-9e61ed7ab131}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\CustomStringOutputLogger\os">
-      <UniqueIdentifier>{7e18527b-3de2-4124-ba2d-72792635bb68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\DirectLogger\os">
-      <UniqueIdentifier>{ca788a8c-0c90-486f-bcb5-2dfec23d81f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\MaxiLogger\os">
-      <UniqueIdentifier>{2334f55b-1354-4ce6-be8e-0b945e032c28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\MiniLogger\os">
-      <UniqueIdentifier>{788c9a70-c430-41bf-8e9c-93cdbf453a88}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\UnboundQueueLoggger\os">
-      <UniqueIdentifier>{db9aea34-3a2f-481d-9e7b-e306029161a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\SeveralLoggers\os">
-      <UniqueIdentifier>{fa98eee2-a86a-4e40-a513-1c4419ac1bf0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\SeparateFilesLogger\os">
-      <UniqueIdentifier>{9da735b3-54cf-4d13-8447-3ce83471f4b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\BinaryOutputLogger\os\windows">
-      <UniqueIdentifier>{dba4b849-96b1-41a2-9184-211949a9d6c5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\ColoredLogger\os\windows">
-      <UniqueIdentifier>{763e77f0-e6b5-4d57-b853-37ca5921d98e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\CustomEntryLogger\os\windows">
-      <UniqueIdentifier>{86a8e6bb-a5f1-4afb-9089-ecda750e04a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\CustomFieldLogger\os\windows">
-      <UniqueIdentifier>{672db2ca-4823-480d-8e41-266cb20a99fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\CustomStringOutputLogger\os\windows">
-      <UniqueIdentifier>{f7bf5d34-fc53-410e-bab8-7cc31e985293}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\DirectLogger\os\windows">
-      <UniqueIdentifier>{af93736c-08e3-4e51-ab29-17328a519b79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\MaxiLogger\os\windows">
-      <UniqueIdentifier>{9f544107-3839-4f3a-b575-299535c84e01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\MiniLogger\os\windows">
-      <UniqueIdentifier>{db9c4b14-b6a8-4ff0-ba80-cfa1273bb1d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\UnboundQueueLoggger\os\windows">
-      <UniqueIdentifier>{d671de2a-b2b9-444c-8b8a-98989d8677bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\SeveralLoggers\os\windows">
-      <UniqueIdentifier>{2e3964eb-b74a-4f36-b353-52f8fd181d54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="source\modules\tests\SeparateFilesLogger\os\windows">
-      <UniqueIdentifier>{bfe9ad8a-38dc-456c-8db4-82978543403f}</UniqueIdentifier>
+      <UniqueIdentifier>{6f1b512f-4d5e-409a-bd0e-7cadebb82478}</UniqueIdentifier>
     </Filter>
     <Filter Include="source\modules\tests\CommandLineLogger">
-      <UniqueIdentifier>{56ff8783-6238-4e80-814a-76a33b7b3e82}</UniqueIdentifier>
+      <UniqueIdentifier>{05d58c23-3b04-4a8c-ad10-d44adc59114c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\modules\tests\CommandLineLogger\os">
-      <UniqueIdentifier>{53d54aa8-96e3-4801-9790-546b15b3e3e7}</UniqueIdentifier>
+    <Filter Include="source\modules\tests\CustomEntryLogger">
+      <UniqueIdentifier>{95608a22-17fe-428c-a022-b77039f62b92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\modules\tests\CommandLineLogger\os\windows">
-      <UniqueIdentifier>{f948d553-2970-4f71-a0d1-e6d24ab684bf}</UniqueIdentifier>
+    <Filter Include="source\modules\tests\CustomFieldLogger">
+      <UniqueIdentifier>{4c3e9c24-f6f7-4235-ab7e-e5d1db137212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\tests\CustomStringOutputLogger">
+      <UniqueIdentifier>{13f1da2e-8109-4f74-8b1b-44916d97bbc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\tests\DirectLogger">
+      <UniqueIdentifier>{14a6c42b-019f-43ef-a118-b859c19a41c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\tests\MaxiLogger">
+      <UniqueIdentifier>{8426b6b3-f71c-4017-a1b2-440eace9e756}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\tests\MiniLogger">
+      <UniqueIdentifier>{bdf6017d-2001-46a5-83a0-ce1149f33264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\tests\SeparateFilesLogger">
+      <UniqueIdentifier>{b108e396-6af4-4d55-b118-9b291a67843b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\tests\SeveralLoggers">
+      <UniqueIdentifier>{000bbb29-2ad2-4030-9f9f-dda223573393}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\modules\tests\UnboundQueueLoggger">
+      <UniqueIdentifier>{e2d3c01b-cc2e-445c-a9eb-70ef8a9b76dd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -170,176 +77,173 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\modules\core\common\exception\Glas.Exception.ixx">
-      <Filter>source\modules\core\common\exception</Filter>
+    <ClCompile Include="source\modules\common\Glas.Exception.ixx">
+      <Filter>source\modules\common</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\entries\Glas.ErrorEntry.ixx">
-      <Filter>source\modules\core\common\entries</Filter>
+    <ClCompile Include="source\modules\common\Glass.BasicCharBufferWriter.ixx">
+      <Filter>source\modules\common</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\fields\Glas.LocationField.ixx">
-      <Filter>source\modules\core\common\fields</Filter>
+    <ClCompile Include="source\modules\common\Glass.Concepts.ixx">
+      <Filter>source\modules\common</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\fields\Glas.MessageField.ixx">
-      <Filter>source\modules\core\common\fields</Filter>
+    <ClCompile Include="source\modules\entries\Glas.BytesEntry.ixx">
+      <Filter>source\modules\entries</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.Entry.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\entries\Glas.ErrorEntry.ixx">
+      <Filter>source\modules\entries</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.Format.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\entries\Glas.InfoEntry.ixx">
+      <Filter>source\modules\entries</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.Logger.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\entries\Glas.LinesEntry.ixx">
+      <Filter>source\modules\entries</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.Output.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\entries\Glas.SequenceEntry.ixx">
+      <Filter>source\modules\entries</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.OutputManager.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\entries\Glas.SuccessEntry.ixx">
+      <Filter>source\modules\entries</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.Padding.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\entries\Glas.TraceEntry.ixx">
+      <Filter>source\modules\entries</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.Queue.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\entries\Glas.WarningEntry.ixx">
+      <Filter>source\modules\entries</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.StringOutputFormat.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\fields\Glas.ErrorCodeField.ixx">
+      <Filter>source\modules\fields</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.VTSequence.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\fields\Glas.LocationField.ixx">
+      <Filter>source\modules\fields</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glas.VTStyle.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\fields\Glas.LoggerNameField.ixx">
+      <Filter>source\modules\fields</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\prepares\Glas.LocationPrepare.ixx">
-      <Filter>source\modules\core\common\prepares</Filter>
+    <ClCompile Include="source\modules\fields\Glas.MessageField.ixx">
+      <Filter>source\modules\fields</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\prepares\Glas.LoggerNamePrepare.ixx">
-      <Filter>source\modules\core\common\prepares</Filter>
+    <ClCompile Include="source\modules\fields\Glas.ThreadIDField.ixx">
+      <Filter>source\modules\fields</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\prepares\Glas.MessagePrepare.ixx">
-      <Filter>source\modules\core\common\prepares</Filter>
+    <ClCompile Include="source\modules\fields\Glas.TimePointField.ixx">
+      <Filter>source\modules\fields</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\prepares\Glas.TypePrepare.ixx">
-      <Filter>source\modules\core\common\prepares</Filter>
+    <ClCompile Include="source\modules\fields\Glas.TypeField.ixx">
+      <Filter>source\modules\fields</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\os\windows\exception\Glas.Exception.cpp">
-      <Filter>source\modules\core\os\windows\exception</Filter>
+    <ClCompile Include="source\modules\misc\Glas.Entry.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\os\windows\outputs\Glas.ConsoleStringOutput.ixx">
-      <Filter>source\modules\core\os\windows\outputs</Filter>
+    <ClCompile Include="source\modules\misc\Glas.Format.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\os\windows\outputs\Glas.DebugStringOutput.ixx">
-      <Filter>source\modules\core\os\windows\outputs</Filter>
+    <ClCompile Include="source\modules\misc\Glas.Logger.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\os\windows\outputs\Glas.File.ixx">
-      <Filter>source\modules\core\os\windows\outputs</Filter>
+    <ClCompile Include="source\modules\misc\Glas.Output.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\os\windows\outputs\Glas.FileStringOutput.ixx">
-      <Filter>source\modules\core\os\windows\outputs</Filter>
+    <ClCompile Include="source\modules\misc\Glas.OutputManager.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\MiniLogger\os\windows\Glas.Test.MiniLogger.ixx">
-      <Filter>source\modules\tests\MiniLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\misc\Glas.Padding.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glass.BasicCharBufferWriter.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\misc\Glas.Queue.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\foundation\Glass.Concepts.ixx">
-      <Filter>source\modules\core\common\foundation</Filter>
+    <ClCompile Include="source\modules\misc\Glas.StringOutputFormat.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\entries\Glas.InfoEntry.ixx">
-      <Filter>source\modules\core\common\entries</Filter>
+    <ClCompile Include="source\modules\misc\Glas.VTSequence.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\entries\Glas.LinesEntry.ixx">
-      <Filter>source\modules\core\common\entries</Filter>
+    <ClCompile Include="source\modules\misc\Glas.VTStyle.ixx">
+      <Filter>source\modules\misc</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\entries\Glas.SequenceEntry.ixx">
-      <Filter>source\modules\core\common\entries</Filter>
+    <ClCompile Include="source\modules\prepares\Glas.LocationPrepare.ixx">
+      <Filter>source\modules\prepares</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\entries\Glas.SuccessEntry.ixx">
-      <Filter>source\modules\core\common\entries</Filter>
+    <ClCompile Include="source\modules\prepares\Glas.LoggerNamePrepare.ixx">
+      <Filter>source\modules\prepares</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\entries\Glas.TraceEntry.ixx">
-      <Filter>source\modules\core\common\entries</Filter>
+    <ClCompile Include="source\modules\prepares\Glas.MessagePrepare.ixx">
+      <Filter>source\modules\prepares</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\entries\Glas.WarningEntry.ixx">
-      <Filter>source\modules\core\common\entries</Filter>
+    <ClCompile Include="source\modules\prepares\Glas.TypePrepare.ixx">
+      <Filter>source\modules\prepares</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\fields\Glas.LoggerNameField.ixx">
-      <Filter>source\modules\core\common\fields</Filter>
+    <ClCompile Include="source\modules\outputs\Glas.ConsoleStringOutput.ixx">
+      <Filter>source\modules\outputs</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\fields\Glas.ThreadIDField.ixx">
-      <Filter>source\modules\core\common\fields</Filter>
+    <ClCompile Include="source\modules\outputs\Glas.DebugStringOutput.ixx">
+      <Filter>source\modules\outputs</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\fields\Glas.TimePointField.ixx">
-      <Filter>source\modules\core\common\fields</Filter>
+    <ClCompile Include="source\modules\outputs\Glas.File.ixx">
+      <Filter>source\modules\outputs</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\common\fields\Glas.TypeField.ixx">
-      <Filter>source\modules\core\common\fields</Filter>
+    <ClCompile Include="source\modules\outputs\Glas.FileStringOutput.ixx">
+      <Filter>source\modules\outputs</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\os\windows\entries\Glas.BytesEntry.ixx">
-      <Filter>source\modules\core\os\windows\entries</Filter>
+    <ClCompile Include="source\modules\tests\BinaryOutputLogger\Glas.Test.BinaryOutputFile.ixx">
+      <Filter>source\modules\tests\BinaryOutputLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\core\os\windows\fields\Glas.ErrorCodeField.ixx">
-      <Filter>source\modules\core\os\windows\fields</Filter>
+    <ClCompile Include="source\modules\tests\BinaryOutputLogger\Glas.Test.BinaryOutputLogger.ixx">
+      <Filter>source\modules\tests\BinaryOutputLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\SeparateFilesLogger\os\windows\Glas.Test.SeparateFilesLogger.ixx">
-      <Filter>source\modules\tests\SeparateFilesLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\BinaryOutputLogger\Glas.Test.ValueEntry.ixx">
+      <Filter>source\modules\tests\BinaryOutputLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\SeveralLoggers\os\windows\Glas.Test.DebugLogger.ixx">
-      <Filter>source\modules\tests\SeveralLoggers\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\ColoredLogger\Glas.Test.ColoredLogger.ixx">
+      <Filter>source\modules\tests\ColoredLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\SeveralLoggers\os\windows\Glas.Test.NotifyLogger.ixx">
-      <Filter>source\modules\tests\SeveralLoggers\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\CommandLineLogger\CommandLineLogger.ixx">
+      <Filter>source\modules\tests\CommandLineLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\SeveralLoggers\os\windows\Glas.Test.OtherLogger.ixx">
-      <Filter>source\modules\tests\SeveralLoggers\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\CustomEntryLogger\Glas.Test.CriticalEntry.ixx">
+      <Filter>source\modules\tests\CustomEntryLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\UnboundQueueLoggger\os\windows\Glas.Test.UnboundQueueLogger.ixx">
-      <Filter>source\modules\tests\UnboundQueueLoggger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\CustomEntryLogger\Glas.Test.CustomEntryLogger.ixx">
+      <Filter>source\modules\tests\CustomEntryLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\MaxiLogger\os\windows\Glas.Test.MaxiLogger.ixx">
-      <Filter>source\modules\tests\MaxiLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\CustomFieldLogger\Glas.Test.CustomFieldLogger.ixx">
+      <Filter>source\modules\tests\CustomFieldLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\DirectLogger\os\windows\Glas.Test.DirectLogger.ixx">
-      <Filter>source\modules\tests\DirectLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\CustomFieldLogger\Glas.Test.UserNameField.ixx">
+      <Filter>source\modules\tests\CustomFieldLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\CustomStringOutputLogger\os\windows\Glas.Test.CustomStringOutputLogger.ixx">
-      <Filter>source\modules\tests\CustomStringOutputLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\CustomStringOutputLogger\Glas.Test.CustomStringOutputLogger.ixx">
+      <Filter>source\modules\tests\CustomStringOutputLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\CustomStringOutputLogger\os\windows\Glas.Test.WindowsEventOutput.ixx">
-      <Filter>source\modules\tests\CustomStringOutputLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\CustomStringOutputLogger\Glas.Test.WindowsEventOutput.ixx">
+      <Filter>source\modules\tests\CustomStringOutputLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\CustomFieldLogger\os\windows\Glas.Test.CustomFieldLogger.ixx">
-      <Filter>source\modules\tests\CustomFieldLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\DirectLogger\Glas.Test.DirectLogger.ixx">
+      <Filter>source\modules\tests\DirectLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\CustomFieldLogger\os\windows\Glas.Test.UserNameField.ixx">
-      <Filter>source\modules\tests\CustomFieldLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\MaxiLogger\Glas.Test.MaxiLogger.ixx">
+      <Filter>source\modules\tests\MaxiLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\CustomEntryLogger\os\windows\Glas.Test.CriticalEntry.ixx">
-      <Filter>source\modules\tests\CustomEntryLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\MiniLogger\Glas.Test.MiniLogger.ixx">
+      <Filter>source\modules\tests\MiniLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\CustomEntryLogger\os\windows\Glas.Test.CustomEntryLogger.ixx">
-      <Filter>source\modules\tests\CustomEntryLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\UnboundQueueLoggger\Glas.Test.UnboundQueueLogger.ixx">
+      <Filter>source\modules\tests\UnboundQueueLoggger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\ColoredLogger\os\windows\Glas.Test.ColoredLogger.ixx">
-      <Filter>source\modules\tests\ColoredLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\SeveralLoggers\Glas.Test.DebugLogger.ixx">
+      <Filter>source\modules\tests\SeveralLoggers</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\BinaryOutputLogger\os\windows\Glas.Test.BinaryOutputFile.ixx">
-      <Filter>source\modules\tests\BinaryOutputLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\SeveralLoggers\Glas.Test.NotifyLogger.ixx">
+      <Filter>source\modules\tests\SeveralLoggers</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\BinaryOutputLogger\os\windows\Glas.Test.BinaryOutputLogger.ixx">
-      <Filter>source\modules\tests\BinaryOutputLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\SeveralLoggers\Glas.Test.OtherLogger.ixx">
+      <Filter>source\modules\tests\SeveralLoggers</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\BinaryOutputLogger\os\windows\Glas.Test.ValueEntry.ixx">
-      <Filter>source\modules\tests\BinaryOutputLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\SeparateFilesLogger\Glas.Test.SeparateFilesLogger.ixx">
+      <Filter>source\modules\tests\SeparateFilesLogger</Filter>
     </ClCompile>
-    <ClCompile Include="source\modules\tests\CommandLineLogger\os\windows\CommandLineLogger.ixx">
-      <Filter>source\modules\tests\CommandLineLogger\os\windows</Filter>
-    </ClCompile>
-    <ClCompile Include="source\modules\tests\MaxiLogger\os\windows\Main.cpp">
-      <Filter>source\modules\tests\MaxiLogger\os\windows</Filter>
+    <ClCompile Include="source\modules\tests\MiniLogger\Main.cpp">
+      <Filter>source\modules\tests\MiniLogger</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

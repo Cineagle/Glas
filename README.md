@@ -8,7 +8,7 @@
 - Modules-based
 - Thread-safe
 - Flexible
-- Cross-platform (currently implemented OS: Windows)
+- Platform: Windows
 - Uses `std::format`
 - No dependencies
 
