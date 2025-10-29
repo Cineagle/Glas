@@ -26,7 +26,7 @@ export namespace Glas
             text = std::vformat(format, std::make_format_args(args...));
         }
         catch (const std::format_error& ex) {
-            throw Exception{ std::format("Formatting error: {}.", ex.what()) };
+            throw Exception{ std::format("Formatting error: {} `format` is \"{}\".", ex.what(), format) };
         }
     }
 }
